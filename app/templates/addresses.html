@@ -10,17 +10,19 @@
     <table border="1">
         <thead>
             <tr>
-                <th>Account Number</th>
-                <th>Branch Name</th>
-                <th>Balance</th>
+                <th>Address ID</th>
+                <th>Street Address</th>
+                <th>Zipcode</th>
+                <th>City ID</th>
             </tr>
         </thead>
         <tbody>
-            {% for account in accounts %}
+            {% for address in addresses %}
             <tr>
-                <td>{{ account.account_number }}</td>
-                <td>{{ account.branch_name }}</td>
-                <td>{{ account.balance }}</td>
+                <td>{{ address.address_id }}</td>
+                <td>{{ address.street_address }}</td>
+                <td>{{ address.zip_code }}</td>
+                <td>{{ address.city_id }}</td>
             </tr>
             {% endfor %}
         </tbody>

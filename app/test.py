@@ -11,15 +11,15 @@ def get_db():
                            cursorclass=pymysql.cursors.DictCursor)
 
 @app.route('/')
-def display_accounts():
+def display_address():
     db = get_db()
     cursor = db.cursor()
-    query = "SELECT * FROM account"
+    query = "SELECT * FROM Addresses"
     cursor.execute(query)
-    accounts = cursor.fetchall()
+    addresses = cursor.fetchall()
     db.close()
-
-    return render_template('accounts.html', accounts=accounts)
+    #this key is the context variable for addresses.html (can have more than one)
+    return render_template('addresses.html', addresses=addresses) 
 
 @app.route('/second_page')
 def second_page():
