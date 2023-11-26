@@ -1,0 +1,21 @@
+<!-- post.html -->
+{% extends "base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+</head>
+<body>
+    <h1>Post {{ id }}</h1>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li><a href="{{ url_for('cart') }}">Shopping Cart</a></li>
+        </ul>
+    </nav>
+    <p>This is a post with the id {{ id }}. You can use Flask to query the database and display the content of the post here.</p>
+</body>
+</html>
+{% endblock %}
