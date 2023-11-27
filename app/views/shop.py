@@ -2,7 +2,7 @@
 from flask import Blueprint, render_template, request
 from jinja2 import TemplateNotFound
 
-searchpage = Blueprint('searchpage', __name__, template_folder='templates')
+shop = Blueprint('shop', __name__, template_folder='templates')
 
 # A list of users to display on the search results page
 users = [
@@ -20,7 +20,7 @@ users = [
     }
 ]
 
-@searchpage.route("/search", methods=["GET", "POST"])
+@shop.route("/shop", methods=["GET", "POST"])
 def search():
     # If the request method is POST, get the query and filter the users list
     if request.method == "POST":
