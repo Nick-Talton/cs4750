@@ -1,0 +1,47 @@
+<!-- confirmation.html -->
+{% extends "base.html" %}
+{% block description %}Confirmation{% endblock %}
+{% block title %}Confirmation{% endblock %}
+{% block navtitle %}Confirmation{% endblock %}
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <style>
+    /* Full height image header */
+        .bgimg-1 {
+            background-position: center;
+            background-size: cover;
+            background-image: url("../static/img/confirmation.png");
+            min-height: 100%;
+            min-width: 100%;
+            }
+            
+        .w3-bar .w3-button {
+        padding: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header with full-height image -->
+    <header class="bgimg-1 w3-display-container w3-grayscale-min" id="home" >
+        <div class="w3-display-left w3-text-black" style="margin:auto; padding: 100px;">
+            <span class="w3-jumbo w3-hide-small">Thank You For Your Post!</span><br>
+            <span class="w3-xxlarge w3-hide-large w3-hide-medium">A confirmation email will be sent to you shortly.</span><br>
+            <span class="w3-xlarge">A confirmation email will be sent to you shortly.</span>
+            <div style="display:flex; flex-direction:row;">
+                <p><a href="/post/create" style="padding:50px;"class="w3-button w3-red w3-padding-large w3-xlarge w3-margin-top  w3-hover-opacity-off">Edit Post</a></p>
+                <p><a href="/" class="w3-button w3-red w3-padding-large w3-xlarge w3-margin-top  w3-hover-opacity-off">Back to Home</a></p>
+            </div>
+        </div> 
+
+    </header>
+
+</body>
+</html>
+
+<!-- You can add more features to your confirmation page here -->
+{% endblock %}
