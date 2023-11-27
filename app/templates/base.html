@@ -29,15 +29,20 @@
         <a href="/shop" class="w3-large w3-bar-item w3-button">SHOP</a>
         <a href="/post/create" class="w3-large w3-bar-item w3-button"><i class="fa fa-th"></i>POST</a>
         <a href="/cart" class="w3-large w3-bar-item w3-button"><i class="fa fa-usd"></i> CART</a>
-        <a href="/profile" class="w3-large w3-bar-item w3-button"><i class="fa fa-user"></i> PROFILE</a>
         <a href="/login" class="w3-large w3-bar-item w3-button"><i class="fa fa-user"></i> LOGIN</a>
-        <a onclick=confirmLogout() href="/login" class="w3-large w3-bar-item w3-button"><i class="fa fa-user"></i> LOGOUT</a>
+        <a onclick="openNav()"class="w3-large w3-bar-item w3-button"><i class="fa fa-user"></i> PROFILE</a>
       </div>
       <!-- Hide right-floated links on small screens and replace them with a menu icon -->
 
-      <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
-        <i class="fa fa-bars"></i>
-      </a>
+      <!-- Hidden Sidebar (reveals when clicked on menu icon)-->
+      <div class="w3-sidebar w3-bar-block w3-card w3-animate-right" style="display:none;right:0;" id="mySidebar">
+        <button onclick="closeNav()" class="w3-bar-item w3-button w3-large">Close &times;</button>
+        <a href="/profile" class="w3-large w3-bar-item w3-button">Account</a>
+        <a href="#orders" class="w3-large w3-bar-item w3-button">Orders</a>
+        <a href="#posts" class="w3-large w3-bar-item w3-button">My Posts</a>
+        <a href="/login" onclick=confirmLogout() class="w3-large w3-bar-item w3-button">Logout</a>
+      </div>
+
     </div>
   </div>
 
@@ -78,6 +83,19 @@
   </header> -->
 
   {% block content %}{% endblock %}
+
+  <script>
+    // Open and close sidebar
+    function openNav() {
+      document.getElementById("mySidebar").style.width = "60%";
+      document.getElementById("mySidebar").style.display = "block";
+    }
+    
+    function closeNav() {
+      document.getElementById("mySidebar").style.display = "none";
+    }
+    </script>
+
 
   <script src="#"></script>
   <script>

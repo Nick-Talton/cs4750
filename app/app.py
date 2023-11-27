@@ -25,8 +25,10 @@ app.register_blueprint(loginpage) # /login
 app.register_blueprint(signuppage) # /signup
 app.register_blueprint(cartpage) # /cart
 app.register_blueprint(postspages) # /post/create and /post/<int:id>
-app.register_blueprint(profilepage) # /profile/<user>
+# app.register_blueprint(profilepage) # /profile/<user>
+app.register_blueprint(profilepage) # /profile
 app.register_blueprint(shop) # /shop
+
 
 if __name__ == '__main__':
     app.run(debug=True)
