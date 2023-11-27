@@ -31,6 +31,7 @@
         <a href="/cart" class="w3-large w3-bar-item w3-button"><i class="fa fa-usd"></i> CART</a>
         <a href="/profile" class="w3-large w3-bar-item w3-button"><i class="fa fa-user"></i> PROFILE</a>
         <a href="/login" class="w3-large w3-bar-item w3-button"><i class="fa fa-user"></i> LOGIN</a>
+        <a onclick=confirmLogout() href="/login" class="w3-large w3-bar-item w3-button"><i class="fa fa-user"></i> LOGOUT</a>
       </div>
       <!-- Hide right-floated links on small screens and replace them with a menu icon -->
 
@@ -82,16 +83,19 @@
   <script>
     function confirmLogout() {
         if (confirm('Are you sure you want to log out?')) {
-            window.location.href = "#";
+            window.location.href = "/login";
         }
     }
   </script>
 
   <footer class="footer mt-auto text-center bg-light">
-    <div class="p-3 text-muted" style="background-color:#0a1d30;">
-      © 2023 Copyright:
-      <a class="text-reset" href="#">A.N.E. Pets</a>
+    <div class="text-muted" style="background-color:#0a1d30; padding-top: 15px;">
+      © 2023 Copyright: A.N.E. Pets
+    </div>
+    <div class="text-muted" style="background-color:#0a1d30; padding-bottom: 15px;">
+      <a class="text-reset" href="/">Back to Top</a>
     </div>
   </footer>
+
 </body>
 </html>
