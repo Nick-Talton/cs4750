@@ -9,6 +9,7 @@ from cartpage import cartpage
 from postspages import postspages
 from profilepage import profilepage
 from shoppage import shoppage
+from checkoutpage import checkoutpage
 import pymysql
 
 app = Flask(__name__)
@@ -28,6 +29,7 @@ app.register_blueprint(postspages) # /post/create and /post/<int:id>
 # app.register_blueprint(profilepage) # /profile/<user>
 app.register_blueprint(profilepage) # /profile
 app.register_blueprint(shoppage) # /shop
+app.register_blueprint(checkoutpage) # /checkout
 
 
 if __name__ == '__main__':
