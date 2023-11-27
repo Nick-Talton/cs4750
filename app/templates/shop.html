@@ -1,15 +1,53 @@
 <!-- search.html -->
 {% extends "base.html" %}
-{% block description %}Search{% endblock %}
-{% block title %}Search{% endblock %}
-{% block navtitle %}Search{% endblock %}
+{% block description %}Shop{% endblock %}
+{% block title %}Shop{% endblock %}
+{% block navtitle %}Shop{% endblock %}
 {% block content %}
-<h1>Search Users</h1>
-<p>This is the page where you can search for other users.</p>
-<!-- Create a form that sends a Search request to /search -->
-<form action="/search" method="Search">
-    <label for="query">Enter a username:</label>
-    <input type="text" id="query" name="query" required>
-    <button type="submit">Search</button>
-</form>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/base.css">
+    <link rel="stylesheet" href="../static/css/shop.css">
+</head>
+<body>
+    <div >
+        <h1 style="text-align:center">Shop Pets</h1>
+    <div id="search" class="input-group" style="padding:20px;">
+        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+        <button type="button" class="btn btn-outline-dark" data-mdb-ripple-init>Search</button>
+      </div>
+    </div>
+
+
+    <div class="w3-row-padding w3-padding-16">
+ <!-- Loop through the posts list and display each post title and content -->
+        {% for post in posts %}
+        <div class="w3-third w3-margin-bottom">
+            <img src="../static/img/home1.jpg" alt="Norway" style="width:100%;">
+            <div class="w3-container w3-white">
+              <h3>{{ post.name }}</h3>
+              <h6 class="w3-opacity">{{ post.price }}</h6>
+              <p>{{ post.breed }}</p>
+              <p>{{ post.age }}</p>
+              <button class="w3-button w3-block w3-black w3-margin-bottom">Learn More</button>
+            </div>
+          </div>
+        {% endfor %}
+
+
+    
+        
+      </div>
+</body>
+</html>
+
 {% endblock %}
