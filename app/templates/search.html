@@ -1,10 +1,13 @@
 <!-- search.html -->
-{% extends "navBar.html" %}
+{% extends "base.html" %}
+{% block description %}Search{% endblock %}
+{% block title %}Search{% endblock %}
+{% block navtitle %}Search{% endblock %}
 {% block content %}
 <h1>Search Users</h1>
 <p>This is the page where you can search for other users.</p>
-<!-- Create a form that sends a POST request to /search -->
-<form action="/search" method="POST">
+<!-- Create a form that sends a Search request to /search -->
+<form action="/search" method="Search">
     <label for="query">Enter a username:</label>
     <input type="text" id="query" name="query" required>
     <button type="submit">Search</button>
