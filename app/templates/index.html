@@ -1,14 +1,11 @@
-<!-- signup.html -->
-{% extends "base.html" %}
+<!-- index.html -->
+{% extends "navBar.html" %}
 {% block content %}
-<h1>Sign Up</h1>
-<p>Please fill in the form below to create an account.</p>
-<!-- Create a form that sends a POST request to /signup -->
-<form action="/signup" method="POST">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-    <button type="submit">Sign Up</button>
-</form>
+<h1>Welcome to Flask App</h1>
+<p>This is the home page where you can see the latest posts.</p>
+<!-- Loop through the posts list and display each post title and content -->
+{% for post in posts %}
+<h2>{{ post.title }}</h2>
+<p>{{ post.content }}</p>
+{% endfor %}
 {% endblock %}
