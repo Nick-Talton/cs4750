@@ -30,3 +30,5 @@ app.register_blueprint(postspages) # /post/create and /post/<int:id>
 app.register_blueprint(profilepage) # /profile/<user>
 app.register_blueprint(searchpage) # /searchpage
 
+if __name__ == '__main__':
+    app.run(debug=True)

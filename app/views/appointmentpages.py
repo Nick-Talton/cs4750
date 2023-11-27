@@ -21,6 +21,3 @@ def appointment():
 def confirmation(name, date, time):
     # Render the confirmation.html template with the name, date, and time variables
     return render_template("confirmation.html", name=name, date=date, time=time, title='Confirmation')
-
-if __name__ == '__main__':
-    app.run(debug=True)

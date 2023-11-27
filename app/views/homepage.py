@@ -7,7 +7,7 @@ homepage = Blueprint('homepage', __name__, template_folder='templates')
 # A list of posts to display on the home page
 posts = [
     {
-        "title": "Hello, Flask!",
+        "title": "Hello, Flask!   Evelyn was here!!",
         "content": "This is my first post using Flask and Jinja."
     },
     {
