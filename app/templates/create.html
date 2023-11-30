@@ -38,7 +38,7 @@ color: black ;
 margin-top: 50px ;
 }
 
-#id:hover {
+.post:hover {
     background-color:white;
 }
         </style>
@@ -61,7 +61,7 @@ margin-top: 50px ;
               <div class="card card-custom pb-4" style="background-color:#a17a83; ">
                 <div class="card-body mt-0 mx-5">
                   <div class="text-center mb-3 pb-2 mt-3">
-                    <h4 style="color: white;">Post Details</h4>
+                    <h4 style="color: white;">Post Details - Need to modify so only fields needed for corresponding animal class is shown</h4>
                   </div>
           
                   <form class="mb-0">
@@ -108,13 +108,130 @@ margin-top: 50px ;
                         </div>
                       </div>
                     </div>
+                    <div class="row mb-4">
+                      <div class="col">
+                        <div class="form-outline">
+                          <input type="text" id="form9Example6" class="form-control input-custom" />
+                          <label class="form-label" for="form9Example6">Color</label>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-outline">
+                          <input type="email" id="typeEmail" class="form-control input-custom" />
+                          <label class="form-label" for="typeEmail">Medical Condition(s)</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row mb-4">
+                      <div class="col">
+                        <div class="form-outline">
+                          <input type="text" id="form9Example6" class="form-control input-custom" />
+                          <label class="form-label" for="form9Example6">Care Level</label>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-outline">
+                          <input type="email" id="typeEmail" class="form-control input-custom" />
+                          <label class="form-label" for="typeEmail">Diet</label>
+                        </div>
+                      </div>
+                    </div>
           
+                    <div class="row mb-4">
+                      <div class="col">
+                        <div class="form-outline">
+                          <input type="text" id="form9Example6" class="form-control input-custom" />
+                          <label class="form-label" for="form9Example6">Animal Class</label>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-outline">
+                          <input type="email" id="typeEmail" class="form-control input-custom" />
+                          <label class="form-label" for="typeEmail">Gender</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row mb-4">
+                      <div class="col">
+                        <div class="form-outline">
+                          <input type="text" id="form9Example6" class="form-control input-custom" />
+                          <label class="form-label" for="form9Example6">Eye Color</label>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-outline">
+                          <input type="email" id="typeEmail" class="form-control input-custom" />
+                          <label class="form-label" for="typeEmail">Weight</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row mb-4">
+                      <div class="col">
+                        <div class="form-outline">
+                          <input type="text" id="form9Example6" class="form-control input-custom" />
+                          <label class="form-label" for="form9Example6">Wing Span</label>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-outline">
+                          <input type="email" id="typeEmail" class="form-control input-custom" />
+                          <label class="form-label" for="typeEmail">Noise Level</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row mb-4">
+                      <div class="col">
+                        <div class="form-outline">
+                          <input type="text" id="form9Example6" class="form-control input-custom" />
+                          <label class="form-label" for="form9Example6">Minimum Tank Size</label>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-outline">
+                          <input type="email" id="typeEmail" class="form-control input-custom" />
+                          <label class="form-label" for="typeEmail">Water Type</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row mb-4">
+                      <div class="col">
+                        <div class="form-outline">
+                          <input type="text" id="form9Example6" class="form-control input-custom" />
+                          <label class="form-label" for="form9Example6">Temperament</label>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-outline">
+                          <input type="email" id="typeEmail" class="form-control input-custom" />
+                          <label class="form-label" for="typeEmail">Water ph Level</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row mb-4">
+                      <div class="col">
+                        <div class="form-outline">
+                          <input type="text" id="form9Example6" class="form-control input-custom" />
+                          <label class="form-label" for="form9Example6">Water Temperature Range</label>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-outline">
+                          <input type="email" id="typeEmail" class="form-control input-custom" />
+                          <label class="form-label" for="typeEmail">Habitat</label>
+                        </div>
+                      </div>
+                    </div>
+
                     <div class="float-end ">
-                        <a href="/postconfirmation">
                       <!-- Submit button -->
-                      <button id="post" type="button" class="btn btn-dark btn-rounded"
-                        style="background-color: grey ;">Create Post</button>
-                        </a>
+                      <button id="post" onclick=confirmPost() class="btn btn-rounded"
+                        style="background-color: rgb(212, 212, 212);">Create Post</button>
                     </div>
           
                   </form>
@@ -127,6 +244,12 @@ margin-top: 50px ;
     </body>
 </html>
 
-
+<script>
+  function confirmPost() {
+        if (confirm('Are you sure you want to create this post?')) {
+            window.location.href = "/postconfirmation";
+        }
+    }
+</script>
 <!-- You can add your own logic to create a post here -->
 {% endblock %}
