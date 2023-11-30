@@ -12,9 +12,11 @@ from shoppage import shoppage
 from checkoutpage import checkoutpage
 from confirmationpage import confirmationpage
 from postconfirmationpage import postconfirmationpage
+#from logout import logout
 import pymysql
 
 app = Flask(__name__)
+app.secret_key = 'its_so_secret_lol'
 
 def get_db():
     return pymysql.connect(host='mysql01.cs.virginia.edu',
@@ -25,6 +27,7 @@ def get_db():
 
 app.register_blueprint(homepage) # /
 app.register_blueprint(loginpage) # /login
+#app.register_blueprint(logout)
 app.register_blueprint(signuppage) # /signup
 app.register_blueprint(cartpage) # /cart
 app.register_blueprint(postspages) # /post/create and /post/<int:id>

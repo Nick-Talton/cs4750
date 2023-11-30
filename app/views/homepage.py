@@ -1,5 +1,5 @@
 # homepage.py
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, session
 from jinja2 import TemplateNotFound
 
 homepage = Blueprint('homepage', __name__, template_folder='templates')
@@ -22,6 +22,13 @@ homepage = Blueprint('homepage', __name__, template_folder='templates')
 
 @homepage.route('/')
 def index():
-    # Render the index.html template with the posts variable
-    # return render_template("index.html", title='Home', posts=posts)
-    return render_template("index.html", title='Home')
+    # Check if the user is logged in
+    if 'email' in session:
+        print("user logged in")
+        print("session:", session)
+        logged_in_user = session['email']
+        return render_template('index.html', title='Home', username=logged_in_user)
+    else:
+        # Handle case when no user is logged in
+        print("no user logged in")
+        return render_template('index.html', title='Home')
