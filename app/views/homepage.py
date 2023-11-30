@@ -24,11 +24,11 @@ homepage = Blueprint('homepage', __name__, template_folder='templates')
 def index():
     # Check if the user is logged in
     if 'email' in session:
-        print("user logged in")
-        print("session:", session)
+        # print("user logged in")
+        # print("session:", session)
         logged_in_user = session['email']
         return render_template('index.html', title='Home', username=logged_in_user)
     else:
         # Handle case when no user is logged in
-        print("no user logged in")
+        # print("no user logged in")
         return render_template('index.html', title='Home')

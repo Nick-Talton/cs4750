@@ -33,9 +33,9 @@ def login():
 
 @loginpage.route('/logout')
 def logout():
-    print("logout triggered")
+    # print("logout triggered")
     # Clear the 'email' key from the session
     session.pop('email', None)
     # Redirect to the login page or any other desired destination
-    print("session:", session)
+    # print("session:", session)
     return redirect(url_for('login.login'))
