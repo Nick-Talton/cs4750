@@ -1,6 +1,7 @@
 # loginpage.py
 from flask import Blueprint, render_template, request, redirect, url_for, session
 import pymysql
+import bcrypt
 
 loginpage = Blueprint('login', __name__, template_folder='templates')
 
@@ -21,15 +22,18 @@ def login():
 
         with get_db() as connection:
             with connection.cursor() as cursor:
-                query = "SELECT * FROM Users WHERE email=%s AND password=%s"
-                cursor.execute(query, (email, password))
+                query = "SELECT * FROM Users WHERE email=%s"
+                cursor.execute(query, (email,))
                 user = cursor.fetchone()
-
-                if user:
+                #all the users are going to fail passwordcheck now unless we hash them all so just make a user account for modifying
+                if user and (bcrypt.checkpw(password.encode('utf-8'), user['password'].encode('utf-8'))):
                     session['email'] = email
                     return redirect(url_for("homepage.index"))
+                else:
+                    return render_template('login.html', title='Login', error='Invalid Credentials')
 
-    return render_template('login.html', title='Login', error='Invalid credentials')
+
+    return render_template('login.html', title='Login')
 
 @loginpage.route('/logout')
 def logout():

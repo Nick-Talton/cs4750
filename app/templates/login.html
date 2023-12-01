@@ -10,15 +10,6 @@
 </head>
 <body>
 
-    <!-- <h1 id="title">Login to my Flask website!</h1>
-    <form method="POST" action="\login">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <button type="submit">Login</button>
-    </form> -->
-
     <section class="vh-400" style="background-color: #9A616D;">
         <div class="container py-5 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">
@@ -40,6 +31,12 @@
                         </div>
                     
                         <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
+
+                        {% if error %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ error }}
+                            </div>
+                        {% endif %}
                     
                         <div class="form-outline mb-4">
                             <input type="email" id="email" name="email" class="form-control form-control-lg" />
