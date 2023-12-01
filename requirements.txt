@@ -4,3 +4,4 @@ Werkzeug==2.0.3
 SQLAlchemy==1.4.31
 mysql-connector-python==8.0.33
 pymysql==1.0.2
+bcrypt==4.1.1
