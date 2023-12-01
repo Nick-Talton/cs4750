@@ -42,7 +42,6 @@ def index():
                 query = "SELECT * FROM Users WHERE email=%s"
                 cursor.execute(query, (logged_in_user,))
                 user = cursor.fetchone()
-                #all the users are going to fail passwordcheck now unless we hash them all so just make a user account for modifying
                 first_name = user['first_name']
         return render_template('index.html', title='Home', username=first_name)
     else:
