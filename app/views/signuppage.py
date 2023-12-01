@@ -18,7 +18,6 @@ def get_db():
 @signuppage.route("/signup", methods=["GET", "POST"])
 def signup():
     if request.method == "POST":
-        # Get form data
         firstName = request.form.get("firstName")
         lastName = request.form.get("lastName")
         email = request.form.get("email")
@@ -35,8 +34,6 @@ def signup():
 
         session['email'] = email
 
-        # Redirect to the homepage
         return redirect(url_for('homepage.index', username=email))
 
-    # If the request method is GET, render the signup.html template
     return render_template("signup.html")
