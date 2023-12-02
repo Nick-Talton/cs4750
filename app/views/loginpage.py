@@ -28,6 +28,7 @@ def login():
                 #all the users are going to fail passwordcheck now unless we hash them all so just make a user account for modifying
                 if user and (bcrypt.checkpw(password.encode('utf-8'), user['password'].encode('utf-8'))):
                     session['email'] = email
+                    session['first_name'] = user['first_name']
                     return redirect(url_for("homepage.index"))
                 else:
                     return render_template('login.html', title='Login', error='Invalid Credentials')
@@ -40,6 +41,7 @@ def logout():
     # print("logout triggered")
     # Clear the 'email' key from the session
     session.pop('email', None)
+    session.pop('first_name', None)
     # Redirect to the login page or any other desired destination
     # print("session:", session)
     return redirect(url_for('login.login'))

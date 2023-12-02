@@ -35,14 +35,8 @@ def index():
     if 'email' in session:
         # print("user logged in")
         # print("session:", session)
-        logged_in_user = session['email']
-        first_name = None
-        with get_db() as connection:
-            with connection.cursor() as cursor:
-                query = "SELECT * FROM Users WHERE email=%s"
-                cursor.execute(query, (logged_in_user,))
-                user = cursor.fetchone()
-                first_name = user['first_name']
+        # logged_in_user = session['email']
+        first_name = session['first_name']
         return render_template('index.html', title='Home', username=first_name)
     else:
         # print("no user logged in")
