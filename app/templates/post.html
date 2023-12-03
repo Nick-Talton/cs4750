@@ -24,19 +24,19 @@
         
         <div class="w3-twothird">
             <div style="display:flex; flex-direction:row; ">
-                <h1 style="font-weight:bold;">Teddy</h1>
+                <h1 style="font-weight:bold;">{{ post.name }}</h1>
             </div>
             <div style="display:flex; flex-direction:row;">
                 <h4>By Anonymous</h4>
             </div>
             <div style="display:flex; flex-direction:row;">
-                <h2>$100.00</h2>
+                <h2>{{ post.price }}</h2>
             </div>
             <div style="display:flex; flex-direction:row;">
-                <h2>Golden Retriever</h2>
+                <h2>{{ post.breed }}</h2>
             </div>
             <div style="display:flex; flex-direction:row;">
-                <h3>Teddy is the best dog in the world and is a cutie patootie that's very playful and loves people and is a floof ball and all happy happy all day every day. HEHEHEHEHEHEHEHEHEHEH</h3>
+                <h4>{{ post.age }} Years Old</h4>
             </div>
             
         </div>
@@ -47,23 +47,24 @@
 <div class="w3-container" style="padding-left:100px;padding-bottom:50px;padding-right:100px;">
     <table class="w3-table w3-striped w3-bordered w3-border">
         <thead style="background-color:#a17a83; color:white;"><th style="width:30%">Background Information</th><th></th></thead>
-        <tr><td style="width:30%">Birthday</td><td>12/01/2020</td></tr>
-        <tr><td>Gender</td><td>Male</td></tr>
-        <tr><td>Color</td><td>Golden</td></tr>
-        <tr><td>Animal Class</td><td>Mammal</td></tr>
-        <tr><td>Care Level</td><td>Easy</td></tr>
-        <tr><td>Diet</td><td>Omnivore</td></tr>
-        <tr><td>Medical Conditions</td><td>None</td></tr>
-        <tr><td>Eye Color</td><td>Brown</td></tr>
-        <tr><td>Weight</td><td>50 Pounds</td></tr>
-        <tr><td>Habitat</td><td>N/A</td></tr>
-        <tr><td>Wing Span</td><td>N/A</td></tr>
-        <tr><td>Noise Level</td><td>N/A</td></tr>
-        <tr><td>Minimum Tank Size</td><td>N/A</td></tr>
-        <tr><td>Temperament</td><td>N/A</td></tr>
-        <tr><td>Water Type</td><td>N/A</td></tr>
-        <tr><td>Water PH Level</td><td>N/A</td></tr>
-        <tr><td>Water Temperature Range</td><td>N/A</td></tr>
+        <tr><td style="width:30%">Birthday</td><td>{{ post.birthday }}</td></tr>
+        <tr><td>Gender</td><td>{{ post.gender }}</td></tr>
+        <tr><td>Color</td><td>{{ post.color }}</td></tr>
+        <tr><td>Animal Class</td><td> {{ post.animal_class }}</td></tr>
+        <tr><td>Description</td><td> {{ post.description }}</td></tr>
+        <tr><td>Care Level</td><td>{{ post.care_level }}</td></tr>
+        <tr><td>Diet</td><td>{{ post.diet }}</td></tr>
+        <tr><td>Medical Conditions</td><td>{{ post.medical_condition }}</td></tr>
+        <tr><td>Eye Color</td><td>{{ post.eye_color }}</td></tr>
+        <tr><td>Weight</td><td>{{ post.weight }}</td></tr>
+        <tr><td>Habitat</td><td>{{ post.habitat }}</td></tr>
+        <tr><td>Wing Span</td><td>{{ post.wing_span }}</td></tr>
+        <tr><td>Noise Level</td><td>{{ post.noise_level }}</td></tr>
+        <tr><td>Minimum Tank Size</td><td>{{ post.min_tank_size }}</td></tr>
+        <tr><td>Temperament</td><td>{{ post.temperament }}</td></tr>
+        <tr><td>Water Type</td><td>{{ post.water_type }}</td></tr>
+        <tr><td>Water PH Level</td><td>{{ post.water_ph_level }}</td></tr>
+        <tr><td>Water Temperature Range</td><td>{{ post.water_temp_range }}</td></tr>
     </table>
 </div>
 
