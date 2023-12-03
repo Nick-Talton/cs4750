@@ -27,9 +27,29 @@
       </div>
     </div>
 
+    <button id="filter-button" class="button">Filter</button>
+    <div id="filtered-posts-container" class="filters">
+        <ul class="filters__list">
+            <li>
+                <input id="Mammals" type="checkbox" />
+                <label for="Mammals">Mammals</label>
+            </li>
+            <li>
+                <input id="Birds" type="checkbox" />
+                <label for="Birds">Birds</label>
+            </li>
+            <li>
+                <input id="Reptiles" type="checkbox" />
+                <label for="Reptiles">Reptiles</label>
+            </li>
+            <li>
+                <input id="Fish" type="checkbox" />
+                <label for="Fish">Fish</label>
+            </li>
+        </ul>
+    </div>
 
     <div class="w3-row-padding w3-padding-16">
- <!-- Loop through the posts list and display each post title and content -->
         {% for post in posts %}
         <div class="w3-third w3-margin-bottom">
             <img src="../static/img/home1.jpg" alt="Norway" style="width:100%;">
@@ -42,11 +62,36 @@
             </div>
           </div>
         {% endfor %}
-
-
-    
-        
       </div>
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("filter-button").addEventListener("click", function () {
+                // Get the selected filters
+                var filters = [];
+                document.querySelectorAll(".filters__list input:checked").forEach(function (checkbox) {
+                    filters.push(checkbox.id);
+                });
+      
+                // Send the selected filters to the server using a Flask route
+                fetch("/shop", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ filters: filters })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Update the view based on the response from the server
+                    console.log(data);
+                    document.getElementById("filtered-posts-container").innerHTML = data.html;
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+            });
+        });
+      </script>
 </body>
 </html>
 
