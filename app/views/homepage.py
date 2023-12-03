@@ -32,12 +32,15 @@ def get_db():
 
 @homepage.route('/')
 def index():
-    if 'email' in session:
-        # print("user logged in")
-        # print("session:", session)
-        # logged_in_user = session['email']
-        first_name = session['first_name']
-        return render_template('index.html', title='Home', username=first_name)
-    else:
-        # print("no user logged in")
-        return render_template('index.html', title='Home')
+    try:
+        if 'email' in session:
+            # print("user logged in")
+            # print("session:", session)
+            # logged_in_user = session['email']
+            first_name = session['first_name']
+            return render_template('index.html', title='Home', username=first_name, error='Whoops... something happened. Please login again.')
+        else:
+            # print("no user logged in")
+            return render_template('index.html', title='Home')
+    except:
+        return render_template('index.html', title='Home', error='Whoops... something happened. Please login again.')
