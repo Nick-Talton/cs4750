@@ -45,6 +45,17 @@
                 <span class="w3-xlarge" style="color:red">{{ error }} <a href="/login" class="w3-button w3-red w3-padding-large w3-xlarge w3-margin-top  w3-hover-opacity-off">Login here</a></span>
             {% else %}
                 {% if username %}
+
+                <h2>Food</h2>
+                <table class="w3-table w3-striped w3-bordered w3-border">
+                <thead class="w3-teal"><th style="width:30%">Food</th><th>Type</th></thead>
+                <tr><td style="width:30%">Seafood</td><td>Shrimps, Crab, Lobster</td></tr>
+                <tr><td>Meat</td><td>Chicken, Pork</td></tr>
+                <tr><td>Cheese</td><td>Brie, Gruyere</td></tr>
+                <tr><td>Other</td><td>Cream sauces</td></tr>
+                </table>
+
+
                     <span class="w3-jumbo w3-hide-small">Hey, {{ username }}!</span><br>
                     <span class="w3-xlarge">This is your profile page, feel free to edit any information as needed</span><br>
                     <ul>
