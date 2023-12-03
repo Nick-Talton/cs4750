@@ -37,6 +37,9 @@ def shop():
                     with connection.cursor() as cursor:
                         cursor.execute(query)
                         filtered_posts = cursor.fetchall()
+                
+                if not filtered_posts:
+                    return render_template('shop.html', title='Shop', post_error="No posts found.", username=first_name, posts=filtered_posts)
 
                 return render_template('shop.html', title='Shop', username=first_name, posts=filtered_posts)
 
@@ -44,12 +47,27 @@ def shop():
                 print(e)
                 return render_template('error.html', error_message="An error occurred during filtering.")
 
+        elif 'picture_type' in request.args:
+            
+            picture_type = request.args.get('picture_type')
+
+            with get_db() as connection:
+                with connection.cursor() as cursor:
+                    query = "SELECT pet_id, breed, name, price, age FROM Pets NATURAL JOIN Breeds NATURAL JOIN Birthdays WHERE animal_class = %s"
+                    cursor.execute(query, (picture_type,))
+                    picture_filtered_posts = cursor.fetchall()
+            if not picture_filtered_posts:
+                return render_template('shop.html', title='Shop', post_error="No posts found.", username=first_name, posts=picture_filtered_posts)
+
+            return render_template('shop.html', title='Shop', username=first_name, posts=picture_filtered_posts)
         else:
             with get_db() as connection:
                 with connection.cursor() as cursor:
                     query = "SELECT pet_id, breed, name, price, age FROM Pets NATURAL JOIN Breeds NATURAL JOIN Birthdays;"
                     cursor.execute(query)
                     posts = cursor.fetchall()
+            if not posts:
+                return render_template('shop.html', title='Shop', post_error="No posts found.", username=first_name, posts=posts)
 
             return render_template('shop.html', title='Shop', username=first_name, posts=posts)
     else:
