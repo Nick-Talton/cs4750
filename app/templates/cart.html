@@ -18,10 +18,15 @@
         <div class="card" style="padding:100px;">
           <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col">
-              <p><span class="h2">Shopping Cart </span><span class="h4">(1 Item In Your Cart)</span></p>
+              <p><span class="h2">Shopping Cart </span><span class="h4">({{ posts|length }} Item In Your Cart)</span></p>
       
               <div class="card mb-4" style="background-color:rgb(248, 246, 246)">
                 <div class="card-body p-4">
+
+
+                {% if posts|length > 0 %}                    
+                  {% for post in posts %}
+
       
                   <div class="row align-items-center">
                     <div class="col-md-2">
@@ -31,37 +36,55 @@
                     <div class="col-md-2 d-flex justify-content-center">
                       <div>
                         <p class="small text-muted mb-4 pb-2">Name</p>
-                        <p class="lead fw-normal mb-0">Spot</p>
+                        <p class="lead fw-normal mb-0">{{ post.name }}</p>
                       </div>
                     </div>
                     <div class="col-md-2 d-flex justify-content-center">
                       <div>
                         <p class="small text-muted mb-4 pb-2">Breed</p>
-                        <p class="lead fw-normal mb-0">Dalmation</p>
+                        <p class="lead fw-normal mb-0">{{ post.breed }}</p>
                       </div>
                     </div>
                     <div class="col-md-2 d-flex justify-content-center">
                       <div>
                         <p class="small text-muted mb-4 pb-2">Age</p>
-                        <p class="lead fw-normal mb-0">1 year old</p>
+                        <p class="lead fw-normal mb-0">{{ post.age }} Years Old</p>
                       </div>
                     </div>
                     <div class="col-md-2 d-flex justify-content-center">
                       <div>
                         <p class="small text-muted mb-4 pb-2">Price</p>
-                        <p class="lead fw-normal mb-0">$100.00</p>
+                        <p class="lead fw-normal mb-0">${{ post.price }}</p>
                       </div>
                     </div>
                     <div class="col-md-2 d-flex justify-content-center">
                       <div>
-                        <p class="small text-muted mb-4 pb-2">Total</p>
-                        <p class="lead fw-normal mb-0">$100.00</p>
+                        <div style="padding:10px;">
+                          <form  action="/cart" method="post">
+                          <a href="/cart">
+                              <button onclick="confirmationRemove()" type="button" class="btn btn-lg me-2 " style=" color:white; background-color:rgb(213, 108, 108)">Remove</button>
+                          </a>
+                          </form>
+                        <script>
+                          function confirmationRemove() {
+                            if (confirm('Are you sure you want to remove this item from your cart?')) {
+
+                              window.location.href = "/cart";
+                            }
+                          }
+                        </script>
+                        </div>
                       </div>
                     </div>
                   </div>
       
-                </div>
-              </div>
+                    </div>
+                  </div>
+                {% endfor %}
+              {% else %}
+                <h1>Nothing in cart</h1>
+              {% endif %}
+
       
               <div class="card mb-5" style="background-color:rgb(248, 246, 246)">
                 <div class="card-body p-4">

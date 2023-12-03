@@ -1,5 +1,5 @@
 # postspages.py
-from flask import Blueprint, render_template, session
+from flask import Blueprint, render_template, session, request
 from jinja2 import TemplateNotFound
 import pymysql
 
@@ -38,9 +38,11 @@ def create():
         return render_template('index.html', title='Home')
 
 
-@postspages.route('/post/<int:id>')
+@postspages.route('/post/<int:id>',  methods=['GET', 'POST'])
 def post(id):
     if 'email' in session:
+
+
         # print("user logged in")
         # print("session:", session)
         # logged_in_user = session['email']
