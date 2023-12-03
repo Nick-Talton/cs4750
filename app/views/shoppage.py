@@ -54,6 +54,7 @@ def shop():
 
             with get_db() as connection:
                 with connection.cursor() as cursor:
+                    # parameterized query
                     query = "SELECT pet_id, breed, name, price, age FROM Pets NATURAL JOIN Breeds NATURAL JOIN Birthdays WHERE animal_class = %s"
                     cursor.execute(query, (picture_type,))
                     picture_filtered_posts = cursor.fetchall()
