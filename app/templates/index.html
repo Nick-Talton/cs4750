@@ -67,40 +67,19 @@
     <h3 class="w3-center w3-xxlarge">FIND YOUR FOREVER FRIEND</h3>
     <p class="w3-center w3-large">See available pets</p>
     <div class="w3-row-padding w3-center" style="margin-top:64px">
+      {% for picture in pictures %}
       <div class="w3-quarter">
-        <!-- replace hrefs with specific queries -->
-        <a href="/shop" style="text-decoration:none">
-            <img class="logo" src="../static/img/doglogo.png" alt="mammal" style="width: 150px; height: 150px;">
-            <p class="w3-xlarge w3-center">Mammals</p>
+        <a href="{{ url_for('shop.shop', picture_type=picture['type']) }}" style="text-decoration:none">
+            <img class="logo" src="{{ picture['url'] }}" alt="mammal" style="width: 150px; height: 150px;">
+            <p class="w3-xlarge w3-center">{{ picture['type'] }}</p>
         </a>
       </div>
-      <div class="w3-quarter">
-        <a href="/shop" style="text-decoration:none">
-            <img class="logo" src="../static/img/birdlogo.png" alt="bird" style="width: 150px; height: 150px;">
-            <p class="w3-xlarge w3-center">Birds</p>
-        </a>
-      </div>
-      <div class="w3-quarter">
-        <a href="/shop" style="text-decoration:none">
-            <img class="logo" src="../static/img/reptilelogo.png" alt="reptile" style="width: 150px; height: 150px;">
-            <p class="w3-xlarge w3-center">Reptiles</p>
-        </a>
-      </div>
-      <div class="w3-quarter">
-        <a href="/shop" style="text-decoration:none">
-            <img class="logo" src="../static/img/fishlogo.png" alt="fish" style="width: 150px; height: 150px;">
-            <p class="w3-xlarge w3-center">Fish</p>
-        </a>
-      </div>
+
+
+
+      {% endfor %}
     </div>
   </div>
-
-
-    <!-- Loop through the posts list and display each post title and content -->
-    <!-- {% for post in posts %}
-    <h2>{{ post.title }}</h2>
-    <p>{{ post.content }}</p>
-    {% endfor %} -->
 
 </body>
 </html>

@@ -50,7 +50,11 @@
             </ul>
         </div>
     </form>
-
+    {% if post_error %}
+        <div class="alert alert-danger" role="alert">
+            {{ post_error }}
+        </div>
+    {% endif %}
     <div class="w3-row-padding w3-padding-16">
         {% for post in posts %}
         <div class="w3-third w3-margin-bottom">

@@ -5,6 +5,15 @@ import pymysql
 
 homepage = Blueprint('homepage', __name__, template_folder='templates')
 
+pictures = [
+
+     {'id': 1, 'url': '../static/img/doglogo.png', 'alt': 'mammal', 'type': "Mammals"},
+     {'id': 2, 'url': '../static/img/birdlogo.png', 'alt': 'bird', 'type': "Birds"},
+     {'id': 3, 'url': '../static/img/reptilelogo.png', 'alt': 'reptile', 'type': "Reptiles"},
+     {'id': 4, 'url': '../static/img/fishlogo.png', 'alt': 'fish', 'type': "Fish"}
+
+]
+
 def get_db():
     return pymysql.connect(
         host='mysql01.cs.virginia.edu',
@@ -14,33 +23,16 @@ def get_db():
         cursorclass=pymysql.cursors.DictCursor
     )
 
-# A list of posts to display on the home page
-# posts = [
-#     {
-#         "title": "Hello, Flask!   Evelyn was here!!",
-#         "content": "This is my first post using Flask and Jinja."
-#     },
-#     {
-#         "title": "Flask is awesome",
-#         "content": "I'm learning how to use Flask to create web applications."
-#     },
-#     {
-#         "title": "Flask templates",
-#         "content": "Flask templates are easy to use and powerful."
-#     }
-# ]
-
 @homepage.route('/')
 def index():
     try:
-        if 'email' in session:
-            # print("user logged in")
-            # print("session:", session)
-            # logged_in_user = session['email']
-            first_name = session['first_name']
-            return render_template('index.html', title='Home', username=first_name)
+        if 'user' in session:
+            # Assuming the user information is stored under the 'user' key
+            user_info = session['user']
+            first_name = user_info['first_name']
+            return render_template('index.html', title='Home', username=first_name, pictures=pictures)
         else:
-            # print("no user logged in")
             return render_template('index.html', title='Home')
-    except:
+    except Exception as e:
+        print(str(e))
         return render_template('index.html', title='Home', error='Whoops... something happened. Please login again.')
