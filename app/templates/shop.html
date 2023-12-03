@@ -13,40 +13,58 @@
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
     crossorigin="anonymous">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../static/css/base.css">
     <link rel="stylesheet" href="../static/css/shop.css">
 </head>
 <body>
-    <div >
+    <div>
         <h1 style="text-align:center; padding:10px;">Shop Pets</h1>
-    <div id="search" class="input-group" style="padding:20px;">
-        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-        <button type="button" class="btn btn-outline-dark" data-mdb-ripple-init>Search</button>
-      </div>
+        <div id="search" class="input-group" style="padding:20px;">
+            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+            <button type="button" class="btn btn-outline-dark" data-mdb-ripple-init>Search</button>
+        </div>
     </div>
 
+    <form action="/shop" method="post">
+        <button id="filter-button" class="button">Filter</button>
+        <div id="filtered-posts-container" class="filters">
+            <ul class="filters__list">
+                <li>
+                    <input id="Mammals" type="checkbox" name="filters" value="Mammals" />
+                    <label for="Mammals">Mammals</label>
+                </li>
+                <li>
+                    <input id="Birds" type="checkbox" name="filters" value="Birds" />
+                    <label for="Birds">Birds</label>
+                </li>
+                <li>
+                    <input id="Reptiles" type="checkbox" name="filters" value="Reptiles" />
+                    <label for="Reptiles">Reptiles</label>
+                </li>
+                <li>
+                    <input id="Fish" type="checkbox" name="filters" value="Fish" />
+                    <label for="Fish">Fish</label>
+                </li>
+            </ul>
+        </div>
+    </form>
 
     <div class="w3-row-padding w3-padding-16">
- <!-- Loop through the posts list and display each post title and content -->
         {% for post in posts %}
         <div class="w3-third w3-margin-bottom">
             <img src="../static/img/home1.jpg" alt="Norway" style="width:100%;">
             <div class="w3-container w3-white">
-              <h3>Name: {{ post.name }}</h3>
-              <h6 class="w3-opacity">Cost: {{ post.price }}</h6>
-              <p>Breed: {{ post.breed }}</p>
-              <p>Age: {{ post.age }}</p>
-              <a href="/post"><button class="w3-button w3-block w3-black w3-margin-bottom">Learn More</button></a>
+                <h3>Name: {{ post.name }}</h3>
+                <h6 class="w3-opacity">Cost: {{ post.price }}</h6>
+                <p>Breed: {{ post.breed }}</p>
+                <p>Age: {{ post.age }}</p>
+                <a href="/post"><button class="w3-button w3-block w3-black w3-margin-bottom">Learn More</button></a>
             </div>
-          </div>
+        </div>
         {% endfor %}
-
-
-    
-        
-      </div>
+    </div>
 </body>
 </html>
 
