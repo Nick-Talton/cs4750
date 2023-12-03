@@ -38,7 +38,7 @@ def index():
             # print("session:", session)
             # logged_in_user = session['email']
             first_name = session['first_name']
-            return render_template('index.html', title='Home', username=first_name, error='Whoops... something happened. Please login again.')
+            return render_template('index.html', title='Home', username=first_name)
         else:
             # print("no user logged in")
             return render_template('index.html', title='Home')
