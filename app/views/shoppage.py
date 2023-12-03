@@ -1,5 +1,5 @@
 # searchpages.py
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, session
 from jinja2 import TemplateNotFound
 
 shoppage = Blueprint('shop', __name__, template_folder='templates')
@@ -72,7 +72,29 @@ posts = [
     }
 ]
 
+# @shoppage.route("/shop", methods=["GET", "POST"])
+# def shop():
+#     # Render the index.html template with the posts variable
+#     return render_template("shop.html", title='Shop', posts=posts)
+
+
+def get_db():
+    return pymysql.connect(
+        host='mysql01.cs.virginia.edu',
+        user='nrt3xs',
+        password='UVa107CS4750!',
+        database='nrt3xs',
+        cursorclass=pymysql.cursors.DictCursor
+    )
+
 @shoppage.route("/shop", methods=["GET", "POST"])
 def shop():
-    # Render the index.html template with the posts variable
-    return render_template("shop.html", title='Shop', posts=posts)
+    if 'email' in session:
+        # print("user logged in")
+        # print("session:", session)
+        # logged_in_user = session['email']
+        first_name = session['first_name']
+        return render_template('shop.html', title='Shop', username=first_name, posts=posts)
+    else:
+        # print("no user logged in")
+        return render_template('index.html', title='Home')
