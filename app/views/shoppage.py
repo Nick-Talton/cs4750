@@ -1,6 +1,7 @@
 # searchpages.py
 from flask import Blueprint, render_template, request, session
 from jinja2 import TemplateNotFound
+import pymysql
 
 shoppage = Blueprint('shop', __name__, template_folder='templates')
 
