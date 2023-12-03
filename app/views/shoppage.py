@@ -39,7 +39,7 @@ def shop():
                         filtered_posts = cursor.fetchall()
                 
                 if not filtered_posts:
-                    return render_template('shop.html', title='Shop', post_error="No posts found.", username=first_name, posts=filtered_posts)
+                    return render_template('shop.html', title='Shop', post_error="No Posts Found", username=first_name, posts=filtered_posts)
 
                 return render_template('shop.html', title='Shop', username=first_name, posts=filtered_posts)
 
@@ -57,7 +57,7 @@ def shop():
                     cursor.execute(query, (picture_type,))
                     picture_filtered_posts = cursor.fetchall()
             if not picture_filtered_posts:
-                return render_template('shop.html', title='Shop', post_error="No posts found.", username=first_name, posts=picture_filtered_posts)
+                return render_template('shop.html', title='Shop', post_error="No Posts Found", username=first_name, posts=picture_filtered_posts)
 
             return render_template('shop.html', title='Shop', username=first_name, posts=picture_filtered_posts)
         else:
@@ -67,7 +67,7 @@ def shop():
                     cursor.execute(query)
                     posts = cursor.fetchall()
             if not posts:
-                return render_template('shop.html', title='Shop', post_error="No posts found.", username=first_name, posts=posts)
+                return render_template('shop.html', title='Shop', post_error="No Posts Found", username=first_name, posts=posts)
 
             return render_template('shop.html', title='Shop', username=first_name, posts=posts)
     else:
