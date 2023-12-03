@@ -29,6 +29,7 @@ def login():
                 if user and (bcrypt.checkpw(password.encode('utf-8'), user['password'].encode('utf-8'))):
                     session['email'] = email
                     session['first_name'] = user['first_name']
+                    session['user'] = user
                     return redirect(url_for("homepage.index"))
                 else:
                     return render_template('login.html', title='Login', error='Invalid Credentials')
@@ -42,6 +43,7 @@ def logout():
     # Clear the 'email' key from the session
     session.pop('email', None)
     session.pop('first_name', None)
+    session.pop('user', None)
     # Redirect to the login page or any other desired destination
     # print("session:", session)
     return redirect(url_for('login.login'))

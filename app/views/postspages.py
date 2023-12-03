@@ -1,6 +1,7 @@
 # postspages.py
 from flask import Blueprint, render_template, session
 from jinja2 import TemplateNotFound
+import pymysql
 
 postspages = Blueprint('postspages', __name__, template_folder='templates')
 
