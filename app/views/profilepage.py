@@ -51,11 +51,13 @@ def profile():
 
                 with get_db() as connection:
                     with connection.cursor() as cursor:
+                        # paramertized queries
                         query = "SELECT * FROM Users WHERE email=%s AND first_name=%s"
                         cursor.execute(query, (logged_in_user,first_name,))
                         user = cursor.fetchone()
 
                         if user and (bcrypt.checkpw(current_password.encode('utf-8'), user['password'].encode('utf-8'))):
+                            # paramertized queries
                             query = "UPDATE Users SET password=%s WHERE email=%s AND first_name=%s"
                             cursor.execute(query, (new_hashed_password, logged_in_user,first_name,))
                             connection.commit()
@@ -66,6 +68,7 @@ def profile():
             else:
                 with get_db() as connection:
                     with connection.cursor() as cursor:
+                        # paramertized queries
                         query = "SELECT * FROM Users WHERE email=%s AND first_name=%s"
                         cursor.execute(query, (logged_in_user,first_name,))
                         user = cursor.fetchone()

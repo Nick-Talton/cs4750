@@ -23,6 +23,7 @@ def shop():
 
         if request.method == 'POST':
             try:
+                # no need for paramertized queries because dropdown
                 selected_filters = request.form.getlist("filters")
 
                 if selected_filters:

@@ -22,6 +22,7 @@ def login():
 
         with get_db() as connection:
             with connection.cursor() as cursor:
+                # paramertized queries
                 query = "SELECT * FROM Users WHERE email=%s"
                 cursor.execute(query, (email,))
                 user = cursor.fetchone()

@@ -28,6 +28,7 @@ def signup():
         with get_db() as connection:
             with connection.cursor() as cursor:
                 #User does take an additional optional field address_id where we can add it in a profile edit or it doesnt really matter tbh
+                # paramertized queries
                 query = "INSERT INTO Users (email, password, first_name, last_name) VALUES (%s, %s, %s, %s)"
                 cursor.execute(query, (email, hashed_password, firstName, lastName))
                 connection.commit()
