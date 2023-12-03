@@ -23,21 +23,14 @@ def shop():
 
         if request.method == 'POST':
             try:
-                # Retrieve the selected filters from the request
-                selected_filters = request.json.get("filters", [])
+                selected_filters = request.form.getlist("filters")
 
-                # Construct the WHERE clause based on the selected filters
                 if selected_filters:
-                    # Construct the WHERE clause for the selected filters
-                    updated_filters = []
-                    for filter in selected_filters:
-                        updated_filters.append("'" + filter + "'")
-                    where_clause = f"animal_class IN ({', '.join([filter for filter in updated_filters])})"
-                    
-                    # Query to filter the data based on the selected filters
+                    updated_filters = [f"'{filter}'" for filter in selected_filters]
+                    where_clause = f"animal_class IN ({', '.join(updated_filters)})"
+
                     query = f"SELECT pet_id, breed, name, price, age FROM Pets NATURAL JOIN Breeds NATURAL JOIN Birthdays WHERE {where_clause};"
                 else:
-                    # Query without filtering if no filters are selected
                     query = "SELECT pet_id, breed, name, price, age FROM Pets NATURAL JOIN Breeds NATURAL JOIN Birthdays;"
 
                 with get_db() as connection:
@@ -45,14 +38,13 @@ def shop():
                         cursor.execute(query)
                         filtered_posts = cursor.fetchall()
 
-                return jsonify({"html": render_template('shop.html', title='Shop', username=first_name, posts=filtered_posts)})
+                return render_template('shop.html', title='Shop', username=first_name, posts=filtered_posts)
 
             except Exception as e:
                 print(e)
-                return jsonify({"error": "An error occurred during filtering."})
+                return render_template('error.html', error_message="An error occurred during filtering.")
 
         else:
-            # Handle GET request without applying any filter
             with get_db() as connection:
                 with connection.cursor() as cursor:
                     query = "SELECT pet_id, breed, name, price, age FROM Pets NATURAL JOIN Breeds NATURAL JOIN Birthdays;"
