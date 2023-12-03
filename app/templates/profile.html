@@ -4,8 +4,78 @@
 {% block title %}Profile{% endblock %}
 {% block navtitle %}Profile{% endblock %}
 {% block content %}
-<h1>Profile</h1>
-<p>Welcome, {{ firstName }}!</p>
-<p>This is your profile page where you can see your personal information.</p>
-<!-- You can add more features to your profile page here -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link ref="stylesheet" href="../static/css/index.css">
+    <style>
+        body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", "Helvecta"}
+
+
+        /* Full height image header */
+        .bgimg-1 {
+            background-position: center;
+            background-size: cover;
+            background-image: url("../static/img/home.jpg");
+            min-height: 100%;
+            min-width: 100%;
+            }
+            
+        .w3-bar .w3-button {
+        padding: 16px;
+        }
+
+        a:hover {
+            color: grey;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header with full-height image -->
+    <header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
+        <div class="w3-display-left w3-text-black" style="padding-left:300px; Padding-right: 75px; padding-top: 75px; padding-bottom: 75px;">
+            {% if error %}
+                <span class="w3-jumbo w3-hide-small">Connecting Hearts, Paws, and Homes</span><br>
+                <span class="w3-xxlarge w3-hide-large w3-hide-medium">A.N.E. Pets: Where Every Pet Finds a Home, and Every Home Finds a Friend.</span><br>
+                <span class="w3-xlarge">A.N.E. Pets: Where Every Pet Finds a Home, and Every Home Finds a Friend.</span><br>
+                <span class="w3-xlarge" style="color:red">{{ error }} <a href="/login" class="w3-button w3-red w3-padding-large w3-xlarge w3-margin-top  w3-hover-opacity-off">Login here</a></span>
+            {% else %}
+                {% if username %}
+                    <span class="w3-jumbo w3-hide-small">Hey, {{ username }}!</span><br>
+                    <span class="w3-xlarge">This is your profile page, feel free to edit any information as needed</span><br>
+                    <ul>
+                        <li>Email: {{ user.email }}</li>
+                        <li>First Name: {{ user.first_name }}</li>
+                        <li>Last Name: {{ user.last_name }}</li>
+                    </ul>
+                    {% if password_error %}
+                        <span class="w3-xlarge">{{ password_error }}</span><br>
+                    {% endif%}
+                    <form action="/update_password" method="post">
+                        <label for="password">Current Password:</label>
+                        <input type="password" name="password"><br>
+                        
+                        <label for="new_password">New Password:</label>
+                        <input type="password" name="new_password"><br>
+    
+                        <label for="confirm_new_password">Confirm New Password:</label>
+                        <input type="password" name="confirm_new_password"><br>
+    
+                        <button type="submit" class="w3-button w3-blue w3-padding-large w3-xlarge w3-margin-top">Update Password</button>
+                    </form>
+                {% else %}
+                    <span class="w3-jumbo w3-hide-small">Connecting Hearts, Paws, and Homes</span><br>
+                    <span class="w3-xxlarge w3-hide-large w3-hide-medium">A.N.E. Pets: Where Every Pet Finds a Home, and Every Home Finds a Friend.</span><br>
+                    <span class="w3-xlarge">A.N.E. Pets: Where Every Pet Finds a Home, and Every Home Finds a Friend.</span><br>
+                    <span class="w3-xlarge">We noticed you're not logged in, <a href="/login" class="w3-button w3-red w3-padding-large w3-xlarge w3-margin-top  w3-hover-opacity-off">Login here</a></span>
+                {% endif %}
+            {% endif %}
+        </div> 
+    </header>
+</body>
+</html>
 {% endblock %}
