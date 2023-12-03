@@ -230,9 +230,19 @@ margin-top: 50px ;
 
                     <div class="float-end ">
                       <!-- Submit button -->
-                      <button id="post" onclick=confirmPost() class="btn btn-rounded"
-                        style="background-color: rgb(212, 212, 212);">Create Post</button>
+                      <a onclick="confirmPost()" href="/postconfirmation" class="w3-large w3-bar-item w3-button" style="background-color: white; color:black;">
+                        Create Post
+                      </a>
                     </div>
+                    <script>
+                      function confirmPost() {
+                            if (confirm('Are you sure you want to create this post?')) {
+                                window.location.href = "/postconfirmation";
+                            } 
+                            return false;
+                        }
+                    
+                    </script>
           
                   </form>
                 </div>
@@ -244,12 +254,6 @@ margin-top: 50px ;
     </body>
 </html>
 
-<script>
-  function confirmPost() {
-        if (confirm('Are you sure you want to create this post?')) {
-            window.location.href = "/postconfirmation";
-        }
-    }
-</script>
+
 <!-- You can add your own logic to create a post here -->
 {% endblock %}
