@@ -17,43 +17,58 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../static/css/base.css">
     <link rel="stylesheet" href="../static/css/shop.css">
+    
 </head>
-<body>
+<body style="min-height:100vh; display:flex; flex-direction:column;">
     <div>
         <h1 style="text-align:center; padding:10px;">Shop Pets</h1>
-        <div id="search" class="input-group" style="padding:20px;">
+        <!-- <div id="search" class="input-group" style="padding:20px;">
             <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
             <button type="button" class="btn btn-outline-dark" data-mdb-ripple-init>Search</button>
-        </div>
+        </div> -->
     </div>
+    
+    <div class="w3-container">
 
     <form action="/shop" method="post">
-        <button id="filter-button" class="button">Filter</button>
-        <div id="filtered-posts-container" class="filters">
-            <ul class="filters__list">
-                <li>
-                    <input id="Mammals" type="checkbox" name="filters" value="Mammals" />
-                    <label for="Mammals">Mammals</label>
-                </li>
-                <li>
-                    <input id="Birds" type="checkbox" name="filters" value="Birds" />
-                    <label for="Birds">Birds</label>
-                </li>
-                <li>
-                    <input id="Reptiles" type="checkbox" name="filters" value="Reptiles" />
-                    <label for="Reptiles">Reptiles</label>
-                </li>
-                <li>
-                    <input id="Fish" type="checkbox" name="filters" value="Fish" />
-                    <label for="Fish">Fish</label>
-                </li>
-            </ul>
+        <div id="filter" style="display:flex; flex-direction:row; justify-content:center;">
+            <div id="filtered-posts-container" class="filters" style="display:flex; flex-direction:row;">
+                <div class="filters__list" style="display:flex; flex-direction:row;">
+                    <div class="checkbox">
+                        <input id="Mammals" type="checkbox" name="filters" value="Mammals" />
+                        <label for="Mammals" class="checkbox-inline">Mammals</label>
+                    </div>
+                    <div class="checkbox">
+                        <input id="Birds" type="checkbox" name="filters" value="Birds" />
+                        <label for="Birds" class="checkbox-inline">Birds</label>
+                    </div>
+                    <div class="checkbox">
+                        <input id="Reptiles" type="checkbox" name="filters" value="Reptiles" />
+                        <label for="Reptiles" class="checkbox-inline">Reptiles</label>
+                    </div>
+                    <div class="checkbox">
+                        <input id="Fish" type="checkbox" name="filters" value="Fish" />
+                        <label for="Fish" class="checkbox-inline">Fish</label>
+                    </div>
+                </div>
+            </div>
+
+            <button class="w3-large w3-bar-item w3-button"  id="filter-button" style="background-color:#a17a83; color:white;">Filter</button>
         </div>
     </form>
+    </div>
+    <style>
+        .checkbox-inline {
+            padding: 10px;
+            font-size:24px;
+        }
+
+    </style>
     {% if post_error %}
-        <div class="alert alert-danger" role="alert">
-            {{ post_error }}
-        </div>
+    <h1 style="text-align:center;">{{ post_error }}</h1>
+    <h4 style="text-align:center; padding-bottom:30px;">Try Searching Something Else!</h4>
+            <img src="../static/img/noposts.jpg" alt="error" style="width:100%; height:100%; object-fit:cover; object-position:center;"/>
+
     {% endif %}
     <div class="w3-row-padding w3-padding-16">
         {% for post in posts %}

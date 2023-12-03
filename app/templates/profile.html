@@ -33,11 +33,11 @@
 
     </style>
 </head>
-<body>
+<body style="min-height:100vh; display:flex; flex-direction:column;">
 
     <!-- Header with full-height image -->
-    <header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
-        <div class="w3-display-left w3-text-black" style="padding-left:300px; Padding-right: 75px; padding-top: 75px; padding-bottom: 75px;">
+    <!-- <header class="bgimg-1 w3-display-container w3-grayscale-min" id="home"> -->
+        <!-- <div class="w3-display-left w3-text-black" style="padding-left:300px; Padding-right: 75px; padding-top: 75px; padding-bottom: 75px;"> -->
             {% if error %}
                 <span class="w3-jumbo w3-hide-small">Connecting Hearts, Paws, and Homes</span><br>
                 <span class="w3-xxlarge w3-hide-large w3-hide-medium">A.N.E. Pets: Where Every Pet Finds a Home, and Every Home Finds a Friend.</span><br>
@@ -46,47 +46,267 @@
             {% else %}
                 {% if username %}
 
-                <h2>Food</h2>
-                <table class="w3-table w3-striped w3-bordered w3-border">
-                <thead class="w3-teal"><th style="width:30%">Food</th><th>Type</th></thead>
-                <tr><td style="width:30%">Seafood</td><td>Shrimps, Crab, Lobster</td></tr>
-                <tr><td>Meat</td><td>Chicken, Pork</td></tr>
-                <tr><td>Cheese</td><td>Brie, Gruyere</td></tr>
-                <tr><td>Other</td><td>Cream sauces</td></tr>
-                </table>
+                {% if password_error %}
+                    <div id="passwordAlert" style="padding-top:50px;padding-left:50px; padding-right:50px;">
+                    <div class="alert">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    {{ password_error }}
+                  </div>
+                </div>
+                {% endif%}
+
+                {% if admin_error %}
+                    <div id="adminAlert" style="padding-top:50px;padding-left:50px; padding-right:50px;">
+                    <div class="alert">
+                    <span class="closebtn2" onclick="this.parentElement.style.display='none';">&times;</span>
+                    {{ admin_error }}
+                  </div>                    
+                {% endif%}
+                    
+
+                <div class="w3-container" style="padding:100px;">
+
+                    <div class="row">
+                    <div class="col-lg-4">
+                    <div class="card mb-4" >
+                        <div class="card-body text-center">
+                          <img src="../static/img/profile.png" alt="avatar"
+                            class="rounded-circle img-fluid" style="width: 183px;">
+                          <h1 class="my-3">Jane Doe</h1>
+                          <div class="d-flex justify-content-center mb-2">
+                            <button id="myBtn" type="button" class="btn" style="background-color:#a17a83; color:white; font-size:18px;">Change Password</button>
+                          </div>
+                          <div class="d-flex justify-content-center mb-2">
+                            <a id="mybtn2" href="#">Admin Login</a>
+                            <!-- <a id="myBtn2" type="button" class="btn" style="background-color:#a17a83; color:white; font-size:18px;">Admin Login</a> -->
+                          </div>
+                        </div>
+                      </div>
+                      </div>
 
 
-                    <span class="w3-jumbo w3-hide-small">Hey, {{ username }}!</span><br>
-                    <span class="w3-xlarge">This is your profile page, feel free to edit any information as needed</span><br>
-                    <ul>
-                        <li>Email: {{ user.email }}</li>
-                        <li>First Name: {{ user.first_name }}</li>
-                        <li>Last Name: {{ user.last_name }}</li>
-                    </ul>
-                    {% if password_error %}
-                        <span class="w3-xlarge">{{ password_error }}</span><br>
-                    {% endif%}
-                    <form action="/update_password" method="post">
-                        <label for="password">Current Password:</label>
-                        <input type="password" name="password"><br>
-                        
-                        <label for="new_password">New Password:</label>
-                        <input type="password" name="new_password"><br>
+                    <!-- The Modal -->
+                    <div id="myModal" class="modal">
+
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <h3 class="close" style="padding:10px;">X</h3>
+                        <form action="/update_password" method="post">
+                            <h3>Change Password</h3>
+                            <div style="padding-bottom:20px;">
+                            <label for="password">Current Password:</label>
+                            <input type="password" name="password"><br>
+                            
+                            <label for="new_password">New Password:</label>
+                            <input type="password" name="new_password"><br>
+        
+                            <label for="confirm_new_password">Confirm New Password:</label>
+                            <input type="password" name="confirm_new_password"><br>
+                            </div>
+                            <button onClick="showAlert()" type="submit" class="w3-button" style="color:white; background-color:#a17a83">Update Password</button>
+                        </form>
+                    </div>
+
+                    </div>
+
+                     <!-- The Modal -->
+                     <div id="myModal2" class="modal">
+
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <h3 id="close2" style="padding:10px;">X</h3>
+                                <h3>Admin Login</h3>
+                                <form action="/grant_admin_privileges" method="post">
+                                    <label for="admin">Admin Password:</label>
+                                    <input type="password" name="admin"><br>
+                                    <div style="padding-top:10px;">
+                                    <button onClick="showAlert2()" type="submit" class="w3-button" style="color:white; background-color:#a17a83">Grant Admin Priviledges</button>
+                                    </div>
+                                </form>
+                        </div>
     
-                        <label for="confirm_new_password">Confirm New Password:</label>
-                        <input type="password" name="confirm_new_password"><br>
+                        </div>
     
-                        <button type="submit" class="w3-button w3-blue w3-padding-large w3-xlarge w3-margin-top">Update Password</button>
-                    </form>
-                    {% if admin_error %}
-                        <span class="w3-xlarge">{{ admin_error }}</span><br>
-                    {% endif%}
-                    <form action="/grant_admin_privileges" method="post">
-                        <label for="admin">Admin Password:</label>
-                        <input type="password" name="admin"><br>
-    
-                        <button type="submit" class="w3-button w3-blue w3-padding-large w3-xlarge w3-margin-top">Update User to Admin</button>
-                    </form>
+
+
+                    <style>
+                        /* The alert message box */
+                    .alert {
+                    padding: 20px;
+                    background-color: #da7d76; /* Red */
+                    color: white;
+                    margin-bottom: 15px;
+                    }
+
+                    /* The close button */
+                    .closebtn {
+                    margin-left: 15px;
+                    color: white;
+                    font-weight: bold;
+                    float: right;
+                    font-size: 22px;
+                    line-height: 20px;
+                    cursor: pointer;
+                    transition: 0.3s;
+                    }
+
+                    /* When moving the mouse over the close button */
+                    .closebtn:hover {
+                    color: black;
+                    }
+
+                    </style>
+
+                      <script>
+
+                        function showAlert() {
+                            var passwordAlert = document.getElementById("passwordAlert");
+                            passwordAlert.style.display = "block";
+                        }    
+                        function showAlert2() {
+                            var adminAlert = document.getElementById("adminAlert");
+                            adminAlert.style.display = "block";
+                        }                                            
+
+                        // Get the modal
+                        var modal = document.getElementById("myModal");
+                        var modal2 = document.getElementById("myModal2");
+
+                        // Get the button that opens the modal
+                        var btn = document.getElementById("myBtn");
+                        var btn2 = document.getElementById("mybtn2");
+
+                        // Get the <span> element that closes the modal
+                        var span = document.getElementsByClassName("close")[0];
+                        var span2 = document.getElementById("close2");
+
+                        // When the user clicks on the button, open the modal
+                        btn.onclick = function() {
+                        modal.style.display = "block";
+                        }
+                        btn2.onclick = function() {
+                            modal2.style.display = "block";
+                        }
+
+                        // When the user clicks on <span> (x), close the modal
+                        span.onclick = function() {
+                        modal.style.display = "none";
+                        }
+                        span2.onclick = function() {
+                            modal2.style.display = "none";
+                        }
+
+                        // When the user clicks anywhere outside of the modal, close it
+                        window.onclick = function(event) {
+                            if (event.target == modal) {
+                                modal.style.display = "none";
+                            }
+                            if (event.target == modal2) {
+                                modal2.style.display = "none";
+                            }
+                        }
+                      </script>
+                      
+                      <style>
+                        input {
+                            width:100%;
+                        }
+                        /* The Modal (background) */
+                        .modal {
+                        display: none; /* Hidden by default */
+                        position: fixed; /* Stay in place */
+                        z-index: 1; /* Sit on top */
+                        left: 0;
+                        top: 0;
+                        width: 100%; /* Full width */
+                        height: 100%; /* Full height */
+                        overflow: auto; /* Enable scroll if needed */
+                        background-color: rgb(0,0,0); /* Fallback color */
+                        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+                        }
+
+                        /* Modal Content/Box */
+                        .modal-content {
+                        background-color: #fefefe;
+                        margin: 15% auto; /* 15% from the top and centered */
+                        padding: 20px;
+                        border: 1px solid #888;
+                        width: 80%; /* Could be more or less, depending on screen size */
+                        }
+
+                        /* The Close Button */
+                        .close {
+                        color: #aaa;
+                        float: right;
+                        font-size: 28px;
+                        font-weight: bold;
+                        }
+
+                        .close:hover,
+                        .close:focus {
+                        color: black;
+                        text-decoration: none;
+                        cursor: pointer;
+                        }
+                      </style>
+
+                <div class="col-lg-8">
+                    <div class="card mb-4" >
+                      <div class="card-body" >
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <p class="mb-0">First Name</p>
+                          </div>
+                          <div class="col-sm-9">
+                            <p class="text-muted mb-0">Jane</p>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <p class="mb-0">Last Name</p>
+                          </div>
+                          <div class="col-sm-9">
+                            <p class="text-muted mb-0">Doe</p>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <p class="mb-0">Email</p>
+                          </div>
+                          <div class="col-sm-9">
+                            <p class="text-muted mb-0">example@gmail.com</p>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                              <p class="mb-0">Password</p>
+                            </div>
+                            <div class="col-sm-9">
+                              <p class="text-muted mb-0">********</p>
+                            </div>
+                          </div>
+                        <hr>
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <p class="mb-0">Address</p>
+                          </div>
+                          <div class="col-sm-9">
+                            <p class="text-muted mb-0">Bay Area, San Francisco, CA</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+                </div>
+
+
+
+                    
+                
 
                 {% else %}
                     <span class="w3-jumbo w3-hide-small">Connecting Hearts, Paws, and Homes</span><br>
@@ -95,8 +315,8 @@
                     <span class="w3-xlarge">We noticed you're not logged in, <a href="/login" class="w3-button w3-red w3-padding-large w3-xlarge w3-margin-top  w3-hover-opacity-off">Login here</a></span>
                 {% endif %}
             {% endif %}
-        </div> 
-    </header>
+        <!-- </div>  -->
+    <!-- </header> -->
 </body>
 </html>
 {% endblock %}
