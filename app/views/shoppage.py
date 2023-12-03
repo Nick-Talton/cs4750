@@ -33,46 +33,6 @@ shoppage = Blueprint('shop', __name__, template_folder='templates')
 #     # If the request method is GET, render the search.html template
 #     return render_template("shop.html", title='Shop')
 
-# A list of posts to display on the home page
-posts = [
-    {
-        "name": "Charlie",
-        "breed": "Golden Retriever",
-        "price" : "$525.00",
-        "age" : "6 months old"
-    },
-    {
-        "name": "Sally",
-        "breed": "Goldfish",
-        "price" : "$10.99",
-        "age" : "5 years old"
-    },
-    {
-        "name": "Peter",
-        "breed": "Parrot",
-        "price" : "$100.00",
-        "age" : "3 years old"
-    },
-    {
-        "name": "Floof",
-        "breed": "Persian Cat",
-        "price" : "$525.00",
-        "age" : "7 months old"
-    },
-    {
-        "name": "Toasty",
-        "breed": "Siberian Husky",
-        "price" : "$1000.99",
-        "age" : "5 months old"
-    },
-    {
-        "name": "Pops",
-        "breed": "Guppie",
-        "price" : "$1.00",
-        "age" : "1 years old"
-    }
-]
-
 # @shoppage.route("/shop", methods=["GET", "POST"])
 # def shop():
 #     # Render the index.html template with the posts variable
@@ -95,6 +55,12 @@ def shop():
         # print("session:", session)
         # logged_in_user = session['email']
         first_name = session['first_name']
+        session_user = session['user']
+        with get_db() as connection:
+                    with connection.cursor() as cursor:
+                        query = "SELECT pet_id, breed, name, price, age FROM Pets NATURAL JOIN Breeds NATURAL JOIN Birthdays;"
+                        cursor.execute(query)
+                        posts = cursor.fetchall()
         return render_template('shop.html', title='Shop', username=first_name, posts=posts)
     else:
         # print("no user logged in")

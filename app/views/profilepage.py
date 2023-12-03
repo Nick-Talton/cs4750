@@ -78,48 +78,36 @@ def profile():
         print(e)
         return render_template('profile.html', title='Profile', error='Whoops... something happened. Please login again.')
             
-@profilepage.route('/grant_admin_privileges', methods=['GET', 'POST'])
+@profilepage.route('/grant_admin_privileges', methods=['POST'])
 def grant_admin_privileges():
     try:
         logged_in_user = session['email']
         first_name = session['first_name']
         session_user = session['user']
-        # Check if user is logged in and request method is POST
         if 'email' in session and request.method == 'POST':
             # print("in here")
 
-            # Check if the provided admin password is correct
             admin_password = "admin_password"  # Replace with your actual admin password
             user_admin_password = request.form.get("admin")
 
             if admin_password == user_admin_password:
                 # print("written correctly")
-                # If the admin password is correct, execute the GRANT statement
                 with get_db() as connection:
                     with connection.cursor() as cursor:
                         # Modify the query to grant the necessary privileges
                         # print("at query statement")
+                        #grant privledges to one of the sub accounts in my database since we are on the cs server we cant really do much with it
                         query = "GRANT ALL PRIVILEGES ON nrt3xs TO 'nrt3xs_a'@'%';"
                         cursor.execute(query)
                         connection.commit()
                 # print("before return")
-                # Redirect the user to the profile page or a success page
+                # return redirect(url_for('profilepage.profile', title='Profile', admin_error='Admin Access Granted.', username=first_name, user=session_user))
                 return render_template('profile.html', title='Profile', admin_error='Admin Access Granted.', username=first_name, user=session_user)
-                # return redirect(url_for('profilepage.profile', username=first_name, user=session_user))
 
             else:
+                # return redirect(url_for('profilepage.profile', title='Profile', admin_error='Incorrect admin password.', username=first_name, user=session_user))
                 return render_template('profile.html', title='Profile', admin_error='Incorrect admin password.', username=first_name, user=session_user)
 
-        else:
-            with get_db() as connection:
-                with connection.cursor() as cursor:
-                    query = "SELECT * FROM Users WHERE email=%s AND first_name=%s"
-                    cursor.execute(query, (logged_in_user,first_name,))
-                    user = cursor.fetchone()
-
-            return render_template('profile.html', title='Profile', username=first_name, user=user)
-
-    # Handle exceptions
     except Exception as e:
         print(e)
         return render_template('profile.html', title='Profile', error='Whoops... something happened. Please try again.', username=first_name)
