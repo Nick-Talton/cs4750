@@ -67,6 +67,16 @@
     
                         <button type="submit" class="w3-button w3-blue w3-padding-large w3-xlarge w3-margin-top">Update Password</button>
                     </form>
+                    {% if admin_error %}
+                        <span class="w3-xlarge">{{ admin_error }}</span><br>
+                    {% endif%}
+                    <form action="/grant_admin_privileges" method="post">
+                        <label for="admin">Admin Password:</label>
+                        <input type="password" name="admin"><br>
+    
+                        <button type="submit" class="w3-button w3-blue w3-padding-large w3-xlarge w3-margin-top">Update User to Admin</button>
+                    </form>
+
                 {% else %}
                     <span class="w3-jumbo w3-hide-small">Connecting Hearts, Paws, and Homes</span><br>
                     <span class="w3-xxlarge w3-hide-large w3-hide-medium">A.N.E. Pets: Where Every Pet Finds a Home, and Every Home Finds a Friend.</span><br>
