@@ -25,7 +25,7 @@ def get_db():
         cursorclass=pymysql.cursors.DictCursor
     )
 
-@postspages.route('/post/create')
+@postspages.route('/post/create', methods=['GET', 'POST'])
 def create():
     if 'email' in session:
         # print("user logged in")
