@@ -163,5 +163,3 @@ def delete_user():
     except Exception as e:
         print(e)
         return render_template('profile.html', title='Profile', error='Whoops... something happened. Please try again.', username=first_name)
-
-(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE email='test@example.com' AND first_name='Nick'' at line 1")
