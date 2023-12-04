@@ -70,7 +70,7 @@ margin-top: 50px ;
 
                   <div class="formbold-main-wrapper" >
                     <div class="formbold-form-wrapper" style="background-color:#fef2f2">
-                      <form action="#" method="POST">
+                      <form action="/postconfirmation" method="POST">
                           <div class="formbold-steps">
                               <ul>
                                   <li class="formbold-step-menu1 active">
@@ -120,7 +120,7 @@ margin-top: 50px ;
                               <label for="ans" class="formbold-form-label">
                                 Animal Class
                               </label>
-                      
+                              <input type="hidden" name="path" id="path" value="">
                               <div class="formbold-radio-flex">
                                 <div class="formbold-radio-group">
                                   <label class="formbold-radio-label">
@@ -182,6 +182,7 @@ margin-top: 50px ;
         
                             <script>
                               function showMammal() {
+                                document.getElementById("path").value = "mammal";  
                                 var mammal = document.getElementById("mammalForm");
                                 var bird = document.getElementById("birdForm");
                                 var reptile = document.getElementById("reptileForm");
@@ -193,6 +194,7 @@ margin-top: 50px ;
                               }
         
                               function showBird() {
+                                document.getElementById("path").value = "bird"; 
                                 var mammal = document.getElementById("mammalForm");
                                 var bird = document.getElementById("birdForm");
                                 var reptile = document.getElementById("reptileForm");
@@ -204,6 +206,7 @@ margin-top: 50px ;
                               }
         
                               function showReptile() {
+                                document.getElementById("path").value = "reptile"; 
                                 var mammal = document.getElementById("mammalForm");
                                 var bird = document.getElementById("birdForm");
                                 var reptile = document.getElementById("reptileForm");
@@ -215,6 +218,7 @@ margin-top: 50px ;
                               }
         
                               function showFish() {
+                                document.getElementById("path").value = "fish"; 
                                 var mammal = document.getElementById("mammalForm");
                                 var bird = document.getElementById("birdForm");
                                 var reptile = document.getElementById("reptileForm");
@@ -444,22 +448,21 @@ margin-top: 50px ;
                                     window.location.ref = "/postconfirmation"
                                   }
                                 </script>
-                                <a href="/postconfirmation" style="background-color: #a17a83; color:white;" class="w3-large w3-bar-item w3-button" onclick="submitForm()">
-                                <!-- <button class="formbold-confirm-btn active"> -->
+                                <button type="submit" formaction="/postconfirmation" style="background-color: #a17a83; color:white;" class="w3-large w3-bar-item w3-button">
                                   <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <circle cx="11" cy="11" r="10.5" fill="white" stroke="#DDE3EC"/>
-                                  <g clip-path="url(#clip0_1667_1314)">
-                                  <path d="M9.83343 12.8509L15.1954 7.48828L16.0208 8.31311L9.83343 14.5005L6.12109 10.7882L6.94593 9.96336L9.83343 12.8509Z" fill="#536387"/>
-                                  </g>
-                                  <defs>
-                                  <clipPath id="clip0_1667_1314">
-                                  <rect width="14" height="14" fill="white" transform="translate(4 4)"/>
-                                  </clipPath>
-                                  </defs>
+                                    <circle cx="11" cy="11" r="10.5" fill="white" stroke="#DDE3EC"/>
+                                    <g clip-path="url(#clip0_1667_1314)">
+                                      <path d="M9.83343 12.8509L15.1954 7.48828L16.0208 8.31311L9.83343 14.5005L6.12109 10.7882L6.94593 9.96336L9.83343 12.8509Z" fill="#536387"/>
+                                    </g>
+                                    <defs>
+                                      <clipPath id="clip0_1667_1314">
+                                        <rect width="14" height="14" fill="white" transform="translate(4 4)"/>
+                                      </clipPath>
+                                    </defs>
                                   </svg>
                                   Yes, create my post.
-                                <!-- </button> -->
-                                </a>
+                                </button>
+                                
                   
                                 <a href="/post/create" style="background-color: #a17a83;  color:white;" " class="w3-large w3-bar-item w3-button">
                                 <!-- <button id="Cancel" class="formbold-confirm-btn"> -->
