@@ -37,15 +37,19 @@ def cart():
                             query = "INSERT INTO Purchases (pet_id, email) VALUES (%s, %s);"
                             cursor.execute(query,(id,logged_in_user,))
                             connection.commit()
-                            connection.close()
-                    # with connection.cursor() as cursor:
-                    #     query = "DELETE FROM Posts WHERE pet_id = %s;"
-                    #     cursor.execute(query,(id,))
-                    #     connection.commit()
-                    #     connection.close()
+                        query = "DELETE FROM Posts WHERE pet_id = %s;"
+                        cursor.execute(query,(id,))
+                        connection.commit()
+                        print('hekki')
+                # with get_db() as connection:
+                #     with connection.cursor() as cursor:
+                #         query = "SELECT SUM(CONVERT(SUBSTRING(price, 2), DECIMAL(10, 2))) AS total FROM Purchases NATURAL JOIN Pets WHERE email=%s;"
+                #         cursor.execute(query,(logged_in_user,))
+                #         total = cursor.fetchone()
+                #         print("totaljjjjj", total)
+                #         return render_template('cart.html', title='Shopping Cart', username=first_name, posts=posts, total=total)
+
             except Exception as e:
-                print(e)
-                print("in except block")
                 print(e)
 
             #     return render_template('cart.html', error_message="An error occurred adding pet to cart.")
@@ -62,8 +66,14 @@ def cart():
                     query = "SELECT * FROM Pets NATURAL JOIN Purchases NATURAL JOIN Birthdays WHERE email=%s;"
                     cursor.execute(query,(logged_in_user,))
                     posts = cursor.fetchall() 
+                    query = "SELECT SUM(CONVERT(SUBSTRING(price, 2), DECIMAL(10, 2))) AS total FROM Purchases NATURAL JOIN Pets WHERE email=%s;"
+                    cursor.execute(query,(logged_in_user,))
+                    total = cursor.fetchone()
+                    print("totaljjjjj", total)
+                    # return render_template('cart.html', title='Shopping Cart', username=first_name, posts=posts, total=total)
+
         print(posts)
-        return render_template('cart.html', title='Shopping Cart', username=first_name, posts=posts)
+        return render_template('cart.html', title='Shopping Cart', username=first_name, posts=posts, total=total['total'])
     else:
         # print("no user logged in")
         return render_template('index.html', title='Home')
