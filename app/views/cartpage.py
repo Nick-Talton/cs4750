@@ -23,17 +23,20 @@ def cart():
 
         if request.method == 'POST':
             try:
+                print("in try block for cart")
                 first_name = session['first_name']
                 logged_in_user = session['email']
                 id = request.args.get('petId')
+                seller=request.args.get('seller')
+                sale_finalized = "0"
                 with get_db() as connection:
                     with connection.cursor() as cursor:
                         query = "SELECT * FROM Purchases WHERE pet_id=%s AND email=%s;"
                         cursor.execute(query,(id,logged_in_user,))
                         item = cursor.fetchone()
                         if not item:
-                            query = "INSERT INTO Purchases (pet_id, email) VALUES (%s, %s);"
-                            cursor.execute(query,(id,logged_in_user,))
+                            query = "INSERT INTO Purchases (pet_id, email, sale_finalized, seller) VALUES (%s, %s, %s,%s);"
+                            cursor.execute(query,(id,logged_in_user,sale_finalized,seller,))
                             connection.commit()
                         query = "DELETE FROM Posts WHERE pet_id = %s;"
                         cursor.execute(query,(id,))
@@ -94,15 +97,18 @@ def cartRemove():
                 first_name = session['first_name']
                 logged_in_user = session['email']
                 id = request.args.get('petId')
-                print("id:", id)
                 with get_db() as connection:
                     with connection.cursor() as cursor:
                         query = "SELECT * FROM Posts WHERE pet_id=%s AND email=%s;"
                         cursor.execute(query,(id,logged_in_user,))
                         item = cursor.fetchone()
+                        print("item:", item)
                         if not item:
+                            query2 = "SELECT * FROM Purchases WHERE pet_id=%s AND email=%s;"
+                            cursor.execute(query2,(id,logged_in_user,))
+                            item2 = cursor.fetchone()
                             query = "INSERT INTO Posts (pet_id, email) VALUES (%s, %s);"
-                            cursor.execute(query,(id,logged_in_user,))
+                            cursor.execute(query,(id,item2['seller'],))
                             connection.commit()
                         query = "DELETE FROM Purchases WHERE pet_id = %s;"
                         cursor.execute(query,(id,))
