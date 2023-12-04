@@ -101,10 +101,12 @@
 
 
             {% else %}
-                <img src="../static/img/myposts.jpg">
+            <div style="text-align:center;">
                 <h1>You haven't created any posts</h1>
+                <img src="../static/img/myposts.jpg" style="padding:0px; max-height:500px;">
                 <h2>Create Your First One Today!</h2>
-                <a href="/post/create" class="btn">Create Post</a>
+                <a href="/post/create" class="btn" style="background-color:#a17a83; color:white;">Create Post</a>
+            </div>
             {% endif %}
               
       
