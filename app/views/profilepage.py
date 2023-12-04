@@ -124,10 +124,9 @@ def orders():
             with get_db() as connection:
                 with connection.cursor() as cursor:
                     # paramertized queries
-                    query = "SELECT * FROM Purchases NATURAL JOIN Posts NATURAL JOIN Pets NATURAL JOIN Breeds NATURAL JOIN Birthdays WHERE email=%s;"
-                    cursor.execute(query, (logged_in_user,))
+                    query = "SELECT pet_id, name, breed, age, price, seller as email, sale_finalized FROM Purchases NATURAL JOIN Pets NATURAL JOIN Breeds NATURAL JOIN Birthdays WHERE email=%s AND sale_finalized=%s"
+                    cursor.execute(query, (logged_in_user,'1'))
                     orders = cursor.fetchall()
-
             if not orders:
                 return render_template('orders.html', title='Profile', order_error='No Orders Found.', username=first_name, user=session_user)
 
