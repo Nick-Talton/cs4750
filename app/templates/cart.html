@@ -30,7 +30,7 @@
       
                   <div class="row align-items-center">
                     <div class="col-md-2">
-                      <img src="../static/img/home1.jpg"
+                      <img src="../static/img/home1.jpg" style="background-color:rgb(248, 246, 246); padding:10px;"
                         class="img-fluid" alt="Generic placeholder image">
                     </div>
                     <div class="col-md-2 d-flex justify-content-center">
@@ -78,9 +78,9 @@
                     </div>
                   </div>
       
-                    </div>
-                  </div>
                 {% endfor %}
+              </div>
+            </div>
               {% else %}
                 <h1>Nothing in cart</h1>
               {% endif %}
@@ -91,7 +91,7 @@
       
                   <div class="float-end">
                     <p class="mb-0 me-5 d-flex align-items-center">
-                      <span class="small text-muted me-2">Order Total:</span> <span
+                      <span class=" text-muted me-2">Order Total:</span> <span
                         class="lead fw-normal">${{ total }}</span>
                     </p>
                   </div>

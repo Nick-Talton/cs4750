@@ -72,7 +72,8 @@ def cart():
                     print("totaljjjjj", total)
                     # return render_template('cart.html', title='Shopping Cart', username=first_name, posts=posts, total=total)
 
-        print(posts)
+        if total['total'] == None:
+            total['total'] = 0.00
         return render_template('cart.html', title='Shopping Cart', username=first_name, posts=posts, total=total['total'])
     else:
         # print("no user logged in")
