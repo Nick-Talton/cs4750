@@ -49,21 +49,35 @@ def createBirthday(requestObject):
     with get_db() as connection:
         with connection.cursor() as cursor:
             # paramertized queries
-            query = "INSERT INTO Birthdays (birthday, age) VALUES (%s, %s)"
-            cursor.execute(query, (
+            birthday = "SELECT birthday FROM Birthdays WHERE birthday=%s"
+            cursor.execute(birthday, (
                 birth_date,
-                age,))
-            connection.commit()
+            ))
+
+            if cursor.fetchone() is None:
+                # paramertized queries
+                query = "INSERT INTO Birthdays (birthday, age) VALUES (%s, %s)"
+                cursor.execute(query, (
+                    birth_date,
+                    age,))
+                connection.commit()
 
 def createBreed(requestObject):
     with get_db() as connection:
         with connection.cursor() as cursor:
             # paramertized queries
-            query = "INSERT INTO Breeds (breed, animal_class) VALUES (%s, %s)"
-            cursor.execute(query, (
+            breed = "SELECT breed FROM Breeds WHERE breed=%s"
+            cursor.execute(breed, (
                 requestObject['breed'],
-                requestObject['path'],))
-            connection.commit()
+            ))
+            
+            if cursor.fetchone() is None: 
+                # paramertized queries
+                query = "INSERT INTO Breeds (breed, animal_class) VALUES (%s, %s)"
+                cursor.execute(query, (
+                    requestObject['breed'],
+                    requestObject['path'],))
+                connection.commit()
 
 
 def createPet(requestObject):
