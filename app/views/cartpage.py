@@ -63,11 +63,11 @@ def cart():
                 with connection.cursor() as cursor:
                     # query = "SELECT * FROM Pets NATURAL JOIN Breeds NATURAL JOIN Birthdays NATURAL JOIN Reptiles NATURAL JOIN Water NATURAL JOIN Fish NATURAL JOIN Mammals NATURAL JOIN Birds WHERE pet_id = %s;"
                     # query = "SELECT * FROM Pets NATURAL JOIN Breeds NATURAL JOIN Birthdays WHERE pet_id = %s;"
-                    query = "SELECT * FROM Pets NATURAL JOIN Purchases NATURAL JOIN Birthdays WHERE email=%s;"
-                    cursor.execute(query,(logged_in_user,))
+                    query = "SELECT * FROM Pets NATURAL JOIN Purchases NATURAL JOIN Birthdays WHERE email=%s AND sale_finalized=%s;"
+                    cursor.execute(query,(logged_in_user,'0',))
                     posts = cursor.fetchall() 
-                    query = "SELECT SUM(CONVERT(SUBSTRING(price, 2), DECIMAL(10, 2))) AS total FROM Purchases NATURAL JOIN Pets WHERE email=%s;"
-                    cursor.execute(query,(logged_in_user,))
+                    query = "SELECT SUM(CONVERT(SUBSTRING(price, 2), DECIMAL(10, 2))) AS total FROM Purchases NATURAL JOIN Pets WHERE email=%s AND sale_finalized=%s;"
+                    cursor.execute(query,(logged_in_user,'0',))
                     total = cursor.fetchone()
                     # return render_template('cart.html', title='Shopping Cart', username=first_name, posts=posts, total=total)
 
@@ -128,11 +128,11 @@ def cartRemove():
                 with connection.cursor() as cursor:
                     # query = "SELECT * FROM Pets NATURAL JOIN Breeds NATURAL JOIN Birthdays NATURAL JOIN Reptiles NATURAL JOIN Water NATURAL JOIN Fish NATURAL JOIN Mammals NATURAL JOIN Birds WHERE pet_id = %s;"
                     # query = "SELECT * FROM Pets NATURAL JOIN Breeds NATURAL JOIN Birthdays WHERE pet_id = %s;"
-                    query = "SELECT * FROM Pets NATURAL JOIN Purchases NATURAL JOIN Birthdays WHERE email=%s;"
-                    cursor.execute(query,(logged_in_user,))
+                    query = "SELECT * FROM Pets NATURAL JOIN Purchases NATURAL JOIN Birthdays WHERE email=%s AND sale_finalized=%s;"
+                    cursor.execute(query,(logged_in_user,'0',))
                     posts = cursor.fetchall() 
-                    query = "SELECT SUM(CONVERT(SUBSTRING(price, 2), DECIMAL(10, 2))) AS total FROM Purchases NATURAL JOIN Pets WHERE email=%s;"
-                    cursor.execute(query,(logged_in_user,))
+                    query = "SELECT SUM(CONVERT(SUBSTRING(price, 2), DECIMAL(10, 2))) AS total FROM Purchases NATURAL JOIN Pets WHERE email=%s AND sale_finalized=%s;"
+                    cursor.execute(query,(logged_in_user,'0'))
                     total = cursor.fetchone()
                     print("totaljjjjj", total)
                     # return render_template('cart.html', title='Shopping Cart', username=first_name, posts=posts, total=total)
