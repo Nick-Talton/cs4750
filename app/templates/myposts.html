@@ -76,7 +76,7 @@
                                 <h4 style="text-align:center; font-weight:bold; color:rgb(125, 125, 125)">Pending Sale</h4>
                               </div>
                               <div class="d-flex flex-column mt-4">
-                                <button style="background-color:#a17a83; color:white;" class="btn" type="button" disabled>Edit</button>
+                                <!-- <button style="background-color:#a17a83; color:white;" class="btn" type="button" disabled>Edit</button> -->
                                 <form id="remove_{{ post.pet_id }}" action="{{ url_for('profilepage.myposts', petId=post.pet_id)}}" method="post">
                                     <input id=petId value="{{ post.pet_id }}" type="hidden" style="text-align:center; color:white; background-color:#a17a83" class="w3-button w3-xlarge w3-margin-top "></input>
                                     
