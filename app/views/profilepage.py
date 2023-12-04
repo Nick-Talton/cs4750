@@ -81,7 +81,7 @@ def profile():
         print(e)
         return render_template('profile.html', title='Profile', error='Whoops... something happened. Please login again.')
 
-@profilepage.route('/profile/myposts/remove', methods=['GET', 'POST'])
+@profilepage.route('/profile/removepost', methods=['GET', 'POST'])
 def remove():
     try:
         if 'user' in session:
@@ -90,6 +90,55 @@ def remove():
             logged_in_user = session['email']
             first_name = session['first_name']
             session_user = session['user']
+            if request.method == 'POST':
+                pet_id = request.form['petId']
+                print("pet_id:", pet_id)
+                with get_db() as connection:
+                    with connection.cursor() as cursor:
+                        # paramertized queries
+                        print("in here")
+                        query = "SELECT * FROM Posts WHERE pet_id=%s AND email=%s"
+                        cursor.execute(query, (pet_id,logged_in_user,))
+                        post = cursor.fetchone()
+                        if not post:
+                            print("in here2")
+                            query = "SELECT * FROM Purchases WHERE pet_id=%s AND seller=%s"
+                            cursor.execute(query, (pet_id,logged_in_user,))
+                            post = cursor.fetchone()
+                            if post:
+                                print("in here3")
+                                query = "DELETE FROM Purchases WHERE pet_id=%s AND seller=%s"
+                                cursor.execute(query, (pet_id,logged_in_user,))
+                                connection.commit()
+                                # print("deleted")
+                        else:
+                            print("in here4")
+                            query = "DELETE FROM Posts WHERE pet_id=%s AND email=%s"
+                            cursor.execute(query, (pet_id,logged_in_user,))
+                            connection.commit()
+
+
+                        # print("deleted")
+            return render_template('myposts.html', title='Profile', username=first_name, user=session_user, posts=posts)
+
+        else:
+            return render_template('index.html', title='Home')
+    except Exception as e:
+        print(e)
+        return render_template('profile.html', title='Profile', error='Whoops... something happened. Please login again.')
+    
+
+
+@profilepage.route('/profile/myposts', methods=['GET', 'POST'])
+def myposts():
+    try:
+        if 'user' in session:
+            # print("user logged in")
+            # print("session:", session)
+            logged_in_user = session['email']
+            first_name = session['first_name']
+            session_user = session['user']
+
             if request.method == 'POST':
                 pet_id = request.form.get('petId')
                 print("pet_id:", pet_id)
@@ -111,7 +160,6 @@ def remove():
                                 cursor.execute(query, (pet_id,logged_in_user,))
                                 connection.commit()
                                 # print("deleted")
-                                return redirect(url_for('profilepage.myposts', title='Profile', username=first_name, user=session_user))
                         else:
                             print("in here4")
                             query = "DELETE FROM Posts WHERE pet_id=%s AND email=%s"
@@ -119,26 +167,7 @@ def remove():
                             connection.commit()
 
 
-                        # print("deleted")
-                        return redirect(url_for('profilepage.myposts', title='Profile', username=first_name, user=session_user))
 
-        else:
-            return render_template('index.html', title='Home')
-    except Exception as e:
-        print(e)
-        return render_template('profile.html', title='Profile', error='Whoops... something happened. Please login again.')
-    
-
-
-@profilepage.route('/profile/myposts', methods=['GET', 'POST'])
-def myposts():
-    try:
-        if 'user' in session:
-            # print("user logged in")
-            # print("session:", session)
-            logged_in_user = session['email']
-            first_name = session['first_name']
-            session_user = session['user']
 
             with get_db() as connection:
                 with connection.cursor() as cursor:

@@ -77,17 +77,18 @@
                               </div>
                               <div class="d-flex flex-column mt-4">
                                 <button style="background-color:#a17a83; color:white;" class="btn" type="button">Edit</button>
-                                <form action="{{ url_for('profilepage.remove', petId=post.pet_id )}}" method="post">
-                                    <button onclick="confirmDelete()"class="btn btn-outline-dark mt-2" type="button">
-                                    Delete Post
-                                    </button>
-                                    <input id=petId value="{{post.pet_id}}" type="hidden" style="text-align:center; color:white; background-color:#a17a83" class="w3-button w3-xlarge w3-margin-top "></input>
+                                <form id="removepost" action="/profile/myposts" method="post">
+                                    <input id=petId value="{{ post.pet_id }}" type="hidden" style="text-align:center; color:white; background-color:#a17a83" class="w3-button w3-xlarge w3-margin-top "></input>
+                                    
                                 </form>
+                                <button onclick="confirmDelete()"class="btn btn-outline-dark mt-2" type="button">
+                                    Delete Post
+                                </button>
                                 <script>
                                     function confirmDelete() {
                                         var result = confirm("Are you sure you want to delete this post?");
                                         if (result) {
-                                            document.getElementByTagName("form")[0].submit();
+                                            document.getElementById("removepost").submit();
                                         }
                                     }
                                 </script>
