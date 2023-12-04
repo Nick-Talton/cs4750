@@ -111,6 +111,62 @@ def myposts():
         return render_template('profile.html', title='Profile', error='Whoops... something happened. Please login again.')
 
 
+@profilepage.route('/profile/myposts/deletepost', methods=['GET', 'POST'])
+def deletepost():
+    try:
+        if 'user' in session:
+            # print("user logged in")
+            # print("session:", session)
+            logged_in_user = session['email']
+            first_name = session['first_name']
+            session_user = session['user']
+
+            if request.method == 'POST':
+                # Handle password update logic
+                pet_id = request.args.get('petId')
+
+                print("pet_id:", pet_id)
+
+                with get_db() as connection:
+                    with connection.cursor() as cursor:
+                        # paramertized queries
+                        query = "SELECT * FROM Posts WHERE pet_id=%s AND email=%s;"
+                        cursor.execute(query,(pet_id,logged_in_user,))
+                        item = cursor.fetchone()
+                        print("item:", item)
+                        if not item:
+                            print("in here")
+                            query = "SELECT * FROM Purchases WHERE pet_id=%s AND seller=%s;"
+                            cursor.execute(query,(id,logged_in_user,))
+                            item2 = cursor.fetchone()
+                            print("item2:", item2)
+                            if item2:
+                                query = "DELETE FROM Purchases WHERE pet_id = %s AND seller=%s;"
+                                cursor.execute(query,(id,logged_in_user,))
+                                connection.commit()
+                                print('hihihi')
+                        else:    
+                            query = "DELETE FROM Posts WHERE pet_id = %s AND email=%s;"
+                            cursor.execute(query,(id,logged_in_user,))
+                            connection.commit()
+                            print('hekki')
+
+                return redirect(url_for('profilepage.myposts', title='Profile', username=first_name, user=session_user))
+
+            else:
+                return render_template('index.html', title='Home')
+        else:
+            return render_template('index.html', title='Home')
+    except Exception as e:
+        print(e)
+        return render_template('profile.html', title='Profile', error='Whoops... something happened. Please login again.')
+
+
+
+
+
+
+
 @profilepage.route('/profile/orders', methods=['GET', 'POST'])
 def orders():
     try:

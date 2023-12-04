@@ -75,17 +75,28 @@
                               <div >
                                 <h4 style="text-align:center; font-weight:bold; color:rgb(125, 125, 125)">Pending Sale</h4>
                               </div>
-                              {% else %}
-                              <div >
-                                <h4 style="text-align:center; font-weight:bold; color:rgb(120, 191, 120)">Sold</h4>
-                              </div>
-                              {% endif %}
                               <div class="d-flex flex-column mt-4">
                                 <button style="background-color:#a17a83; color:white;" class="btn" type="button">Edit</button>
-                                <button class="btn btn-outline-dark mt-2" type="button">
-                                  Delete Post
-                                </button>
+                                <form id="deletePost" action="{{ url_for('profilepage.deletepost', petId=post.pet_id) }}" method="post">
+                                    <button onclick="confirmDelete()" class="btn btn-outline-dark mt-2" type="button">
+                                    Delete Post {{ post.pet_id }}
+                                    </button>
+                                </form>
+                                <script>
+                                    function confirmDelete() {
+                                        var result = confirm("Are you sure you want to delete this post?");
+                                        if (result) {
+                                            document.getElementsByTagName("form")[0].submit();
+                                        }
+                                    }
+                                </script>
                               </div>
+                              {% else %}
+                              <div >
+                                <h1 style="text-align:center; padding-top:10px; font-weight:bold; color:rgb(120, 191, 120)">Sold</h1>
+                              </div>
+                              {% endif %}
+                            
                             </div>
                           </div>
                         </div>
