@@ -92,6 +92,7 @@ def grant_admin_privileges():
 
             admin_password = "admin_password"  # Replace with your actual admin password
             user_admin_password = request.form.get("admin")
+            admin_to_computing_id = request.form.get("computing_id")
 
             if admin_password == user_admin_password:
                 # print("written correctly")
@@ -100,7 +101,7 @@ def grant_admin_privileges():
                         # Modify the query to grant the necessary privileges
                         # print("at query statement")
                         #grant privledges to one of the sub accounts in my database since we are on the cs server we cant really do much with it
-                        query = "GRANT ALL PRIVILEGES ON nrt3xs TO 'nrt3xs_a'@'%';"
+                        query = f"GRANT ALL PRIVILEGES ON nrt3xs TO '{admin_to_computing_id}'@'%';"
                         cursor.execute(query)
                         connection.commit()
                 # print("before return")

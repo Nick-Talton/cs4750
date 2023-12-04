@@ -45,7 +45,7 @@ def signup():
         session['email'] = email
         session['first_name'] = firstName
 
-        print(session)
+        #print(session)
 
         return render_template('index.html', username=firstName)
 
