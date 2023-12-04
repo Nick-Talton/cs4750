@@ -91,7 +91,7 @@ def remove():
             first_name = session['first_name']
             session_user = session['user']
             if request.method == 'POST':
-                pet_id = request.form['petId']
+                pet_id = request.args.get('petId')
                 print("pet_id:", pet_id)
                 with get_db() as connection:
                     with connection.cursor() as cursor:
@@ -140,7 +140,7 @@ def myposts():
             session_user = session['user']
 
             if request.method == 'POST':
-                pet_id = request.form.get('petId')
+                pet_id = request.args.get('petId')
                 print("pet_id:", pet_id)
                 with get_db() as connection:
                     with connection.cursor() as cursor:
