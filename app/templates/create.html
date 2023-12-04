@@ -70,7 +70,7 @@ margin-top: 50px ;
 
                   <div class="formbold-main-wrapper" >
                     <div class="formbold-form-wrapper" style="background-color:#fef2f2">
-                      <form action="#" method="POST">
+                      <form id="postCreationForm" action="/postconfirmation" method="POST" onsubmit="validateForm(event)">
                           <div class="formbold-steps">
                               <ul>
                                   <li class="formbold-step-menu1 active">
@@ -90,7 +90,7 @@ margin-top: 50px ;
                   
                           <div class="formbold-form-step-1 active">
         
-        
+                            <div id="step1Form">
                             <div class="formbold-input-flex">
                               <div>
                                   <label for="name" class="formbold-form-label"> Name </label>
@@ -100,6 +100,7 @@ margin-top: 50px ;
                                   placeholder="Spot"
                                   id="name"
                                   class="formbold-form-input"
+                                  required
                                   />
                               </div>
                               <div>
@@ -112,6 +113,7 @@ margin-top: 50px ;
                                   placeholder="0.00"
                                   id="price"
                                   class="formbold-form-input"
+                                  required
                                   />
                               </div>
                             </div>
@@ -120,7 +122,7 @@ margin-top: 50px ;
                               <label for="ans" class="formbold-form-label">
                                 Animal Class
                               </label>
-                      
+                              <input type="hidden" name="path" id="path" value="">
                               <div class="formbold-radio-flex">
                                 <div class="formbold-radio-group">
                                   <label class="formbold-radio-label">
@@ -182,6 +184,7 @@ margin-top: 50px ;
         
                             <script>
                               function showMammal() {
+                                document.getElementById("path").value = "mammal";  
                                 var mammal = document.getElementById("mammalForm");
                                 var bird = document.getElementById("birdForm");
                                 var reptile = document.getElementById("reptileForm");
@@ -193,6 +196,7 @@ margin-top: 50px ;
                               }
         
                               function showBird() {
+                                document.getElementById("path").value = "bird"; 
                                 var mammal = document.getElementById("mammalForm");
                                 var bird = document.getElementById("birdForm");
                                 var reptile = document.getElementById("reptileForm");
@@ -204,6 +208,7 @@ margin-top: 50px ;
                               }
         
                               function showReptile() {
+                                document.getElementById("path").value = "reptile"; 
                                 var mammal = document.getElementById("mammalForm");
                                 var bird = document.getElementById("birdForm");
                                 var reptile = document.getElementById("reptileForm");
@@ -215,6 +220,7 @@ margin-top: 50px ;
                               }
         
                               function showFish() {
+                                document.getElementById("path").value = "fish"; 
                                 var mammal = document.getElementById("mammalForm");
                                 var bird = document.getElementById("birdForm");
                                 var reptile = document.getElementById("reptileForm");
@@ -234,6 +240,7 @@ margin-top: 50px ;
                                 id="breed" 
                                 class="formbold-form-input"
                                 placeholder="Golden Retriever"
+                                required
                                 />
                               </div>
                     
@@ -245,6 +252,7 @@ margin-top: 50px ;
                                     name="dob" 
                                     id="dob" 
                                     class="formbold-form-input"
+                                    required
                                     />
                                 </div>
                                 <div>
@@ -255,6 +263,7 @@ margin-top: 50px ;
                                     placeholder="Female"
                                     id="email"
                                     class="formbold-form-input"
+                                    required
                                     />
                                 </div>
                             </div>
@@ -267,6 +276,7 @@ margin-top: 50px ;
                                   id="color"
                                   placeholder="Brown"
                                   class="formbold-form-input"
+                                  required
                                   />
                               </div>
                               <div>
@@ -277,6 +287,7 @@ margin-top: 50px ;
                                 id="medical_conditions"
                                 placeholder="None"
                                 class="formbold-form-input"
+                                required
                                 />
                               </div>
                             </div>
@@ -290,6 +301,7 @@ margin-top: 50px ;
                                   id="care_level"
                                   placeholder="Easy"
                                   class="formbold-form-input"
+                                  required
                                   />
                               </div>
                               <div>
@@ -300,6 +312,7 @@ margin-top: 50px ;
                                 id="diet"
                                 placeholder="Omnivore"
                                 class="formbold-form-input"
+                                required
                                 />
                               </div>
                             </div>
@@ -313,6 +326,7 @@ margin-top: 50px ;
                                 placeholder="Type your description"
                                 class="formbold-form-input"
                               ></textarea>
+                            </div>
                             </div>
                           </div>
                   
@@ -330,6 +344,7 @@ margin-top: 50px ;
                                     id="eye_color"
                                     placeholder="Blue"
                                     class="formbold-form-input"
+                                    required
                                     />
                                 </div>
                                 <div>
@@ -342,6 +357,7 @@ margin-top: 50px ;
                                   step="0.01"
                                   min="0"
                                   class="formbold-form-input"
+                                  required
                                   />
                                 </div>
                               </div>
@@ -360,6 +376,7 @@ margin-top: 50px ;
                                     id="wing_span"
                                     placeholder="0.00"
                                     class="formbold-form-input"
+                                    required
                                     />
                                 </div>
                                 <div>
@@ -370,6 +387,7 @@ margin-top: 50px ;
                                   id="noise_level"
                                   placeholder="Loud"
                                   class="formbold-form-input"
+                                  required
                                   />
                                 </div>
                               </div>
@@ -384,6 +402,7 @@ margin-top: 50px ;
                                   id="habitat"
                                   placeholder="Habitat"
                                   class="formbold-form-input"
+                                  required
                                   />
                             </div>
         
@@ -398,9 +417,10 @@ margin-top: 50px ;
                                     min="0"
                                     step="1"
                                     name="min_tank_size"
-                                    id="wing_span"
+                                    id="min_tank_size"
                                     placeholder="0.00"
                                     class="formbold-form-input"
+                                    required
                                     />
                                 </div>
                                 <div>
@@ -411,6 +431,7 @@ margin-top: 50px ;
                                   id="temperament"
                                   placeholder="Aggressive"
                                   class="formbold-form-input"
+                                  required
                                   />
                                 </div>
                               </div>
@@ -440,26 +461,68 @@ margin-top: 50px ;
                               <div>
                                 <script>
                                   function submitForm() {
-                                    document.querySelector('form').submit()
-                                    window.location.ref = "/postconfirmation"
+                                    console.log("alert")
+                                    const mammals = new Set(["wing_span", "noise_level","habitat", "min_tank_size", "temperament", "water_type" ])
+                                    const birds = new Set(["eye_color", "weight", "habitat", "min_tank_size", "temperament", "water_type"])
+                                    const reptiles = new Set(["eye_color", "weight", "wing_span", "noise_level", "min_tank_size", "temperament", "water_type"])
+                                    const fish = new Set(["eye_color", "weight", "wing_span", "noise_level", "habitat"])
+                                    
+
+                                    let skip = new Set([]);
+                                    if (document.getElementById("path").value == "fish"){
+                                      skip = fish;
+                                    } else if (document.getElementById("path").value == "reptiles"){
+                                      skip = reptiles
+                                    } else if (document.getElementById("path").value == "birds"){
+                                      skip = birds
+                                    } else {
+                                      skip = mammals
+                                    }
+
+                                    for (let element of skip){
+                                      console.log(element, document.getElementById(element))
+                                      document.getElementById(element).removeAttribute("required")
+                                      
+                                    }
+
+                                    let form = document.getElementById("postCreationForm")
+                                    let inputs = form.querySelectorAll("input");
+                                    for (let input of inputs) {
+                                      if (!skip.has(input['id']) && !input.checkValidity()) {
+                                        event.preventDefault()
+                                        const formNextBtn = document.getElementById('next_button')
+                                        formNextBtn.style.visibility = "visible";
+                                        console.log(formNextBtn)
+
+                                        formNextBtn.classList.add('active')
+          
+                                        stepMenuThree.classList.remove('active')
+                                        stepMenuOne.classList.add('active')
+                                
+                                        stepThree.classList.remove('active')
+                                        stepOne.classList.add('active')
+                                        break
+          
+                                      }
+                                      
+                                    }
                                   }
                                 </script>
-                                <a href="/postconfirmation" style="background-color: #a17a83; color:white;" class="w3-large w3-bar-item w3-button" onclick="submitForm()">
-                                <!-- <button class="formbold-confirm-btn active"> -->
+                                <button onclick=submitForm() type="submit" formaction="/postconfirmation" style="background-color: #a17a83; color:white;" class="w3-large w3-bar-item w3-button">
                                   <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <circle cx="11" cy="11" r="10.5" fill="white" stroke="#DDE3EC"/>
-                                  <g clip-path="url(#clip0_1667_1314)">
-                                  <path d="M9.83343 12.8509L15.1954 7.48828L16.0208 8.31311L9.83343 14.5005L6.12109 10.7882L6.94593 9.96336L9.83343 12.8509Z" fill="#536387"/>
-                                  </g>
-                                  <defs>
-                                  <clipPath id="clip0_1667_1314">
-                                  <rect width="14" height="14" fill="white" transform="translate(4 4)"/>
-                                  </clipPath>
-                                  </defs>
+                                    <circle cx="11" cy="11" r="10.5" fill="white" stroke="#DDE3EC"/>
+                                    <g clip-path="url(#clip0_1667_1314)">
+                                      <path d="M9.83343 12.8509L15.1954 7.48828L16.0208 8.31311L9.83343 14.5005L6.12109 10.7882L6.94593 9.96336L9.83343 12.8509Z" fill="#536387"/>
+                                    </g>
+                                    <defs>
+                                      <clipPath id="clip0_1667_1314">
+                                        <rect width="14" height="14" fill="white" transform="translate(4 4)"/>
+                                      </clipPath>
+                                    </defs>
                                   </svg>
                                   Yes, create my post.
-                                <!-- </button> -->
-                                </a>
+                                </button>
+                                
                   
                                 <a href="/post/create" style="background-color: #a17a83;  color:white;" " class="w3-large w3-bar-item w3-button">
                                 <!-- <button id="Cancel" class="formbold-confirm-btn"> -->
@@ -485,8 +548,8 @@ margin-top: 50px ;
                             <button class="formbold-back-btn">
                               Back
                             </button>
-                  
-                            <button class="formbold-btn">
+                            
+                            <button id="next_button" class="formbold-btn">
                                 Next Step
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_1675_1807)">
