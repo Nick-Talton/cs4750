@@ -31,6 +31,7 @@ def login():
                     session['email'] = email
                     session['first_name'] = user['first_name']
                     session['user'] = user
+                    #print(session)
                     return redirect(url_for("homepage.index"))
                 else:
                     return render_template('login.html', title='Login', error='Invalid Credentials')
