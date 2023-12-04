@@ -70,7 +70,7 @@ margin-top: 50px ;
 
                   <div class="formbold-main-wrapper" >
                     <div class="formbold-form-wrapper" style="background-color:#fef2f2">
-                      <form action="/postconfirmation" method="POST">
+                      <form id="postCreationForm" action="/postconfirmation" method="POST" onsubmit="validateForm(event)">
                           <div class="formbold-steps">
                               <ul>
                                   <li class="formbold-step-menu1 active">
@@ -90,7 +90,7 @@ margin-top: 50px ;
                   
                           <div class="formbold-form-step-1 active">
         
-        
+                            <div id="step1Form">
                             <div class="formbold-input-flex">
                               <div>
                                   <label for="name" class="formbold-form-label"> Name </label>
@@ -100,6 +100,7 @@ margin-top: 50px ;
                                   placeholder="Spot"
                                   id="name"
                                   class="formbold-form-input"
+                                  required
                                   />
                               </div>
                               <div>
@@ -112,6 +113,7 @@ margin-top: 50px ;
                                   placeholder="0.00"
                                   id="price"
                                   class="formbold-form-input"
+                                  required
                                   />
                               </div>
                             </div>
@@ -238,6 +240,7 @@ margin-top: 50px ;
                                 id="breed" 
                                 class="formbold-form-input"
                                 placeholder="Golden Retriever"
+                                required
                                 />
                               </div>
                     
@@ -249,6 +252,7 @@ margin-top: 50px ;
                                     name="dob" 
                                     id="dob" 
                                     class="formbold-form-input"
+                                    required
                                     />
                                 </div>
                                 <div>
@@ -259,6 +263,7 @@ margin-top: 50px ;
                                     placeholder="Female"
                                     id="email"
                                     class="formbold-form-input"
+                                    required
                                     />
                                 </div>
                             </div>
@@ -271,6 +276,7 @@ margin-top: 50px ;
                                   id="color"
                                   placeholder="Brown"
                                   class="formbold-form-input"
+                                  required
                                   />
                               </div>
                               <div>
@@ -281,6 +287,7 @@ margin-top: 50px ;
                                 id="medical_conditions"
                                 placeholder="None"
                                 class="formbold-form-input"
+                                required
                                 />
                               </div>
                             </div>
@@ -294,6 +301,7 @@ margin-top: 50px ;
                                   id="care_level"
                                   placeholder="Easy"
                                   class="formbold-form-input"
+                                  required
                                   />
                               </div>
                               <div>
@@ -304,6 +312,7 @@ margin-top: 50px ;
                                 id="diet"
                                 placeholder="Omnivore"
                                 class="formbold-form-input"
+                                required
                                 />
                               </div>
                             </div>
@@ -317,6 +326,7 @@ margin-top: 50px ;
                                 placeholder="Type your description"
                                 class="formbold-form-input"
                               ></textarea>
+                            </div>
                             </div>
                           </div>
                   
@@ -334,6 +344,7 @@ margin-top: 50px ;
                                     id="eye_color"
                                     placeholder="Blue"
                                     class="formbold-form-input"
+                                    required
                                     />
                                 </div>
                                 <div>
@@ -346,6 +357,7 @@ margin-top: 50px ;
                                   step="0.01"
                                   min="0"
                                   class="formbold-form-input"
+                                  required
                                   />
                                 </div>
                               </div>
@@ -364,6 +376,7 @@ margin-top: 50px ;
                                     id="wing_span"
                                     placeholder="0.00"
                                     class="formbold-form-input"
+                                    required
                                     />
                                 </div>
                                 <div>
@@ -374,6 +387,7 @@ margin-top: 50px ;
                                   id="noise_level"
                                   placeholder="Loud"
                                   class="formbold-form-input"
+                                  required
                                   />
                                 </div>
                               </div>
@@ -388,6 +402,7 @@ margin-top: 50px ;
                                   id="habitat"
                                   placeholder="Habitat"
                                   class="formbold-form-input"
+                                  required
                                   />
                             </div>
         
@@ -405,6 +420,7 @@ margin-top: 50px ;
                                     id="wing_span"
                                     placeholder="0.00"
                                     class="formbold-form-input"
+                                    required
                                     />
                                 </div>
                                 <div>
@@ -415,6 +431,7 @@ margin-top: 50px ;
                                   id="temperament"
                                   placeholder="Aggressive"
                                   class="formbold-form-input"
+                                  required
                                   />
                                 </div>
                               </div>
@@ -444,11 +461,46 @@ margin-top: 50px ;
                               <div>
                                 <script>
                                   function submitForm() {
-                                    document.querySelector('form').submit()
-                                    window.location.ref = "/postconfirmation"
-                                  }
+                                    // Get the form element
+                                    let form = document.getElementById("postCreationForm");
+                                    // Get all the input elements inside the form
+                                    let inputs = form.querySelectorAll("input");
+                                    // Loop through each input element
+                                    for (let input of inputs) {
+                                      // Check if the input element is valid
+                                      if (!input.checkValidity()) {
+                                        event.preventDefault()
+                                        
+          
+                                        stepMenuThree.classList.remove('active')
+                                        stepMenuOne.classList.add('active')
+                                
+                                        stepThree.classList.remove('active')
+                                        stepOne.classList.add('active')
+                                        
+                                        const formNextBtn = document.querySelector('.formbold-btn')
+
+                                        formNextBtn.classList.add('active')
+                                        formNextBtn.addEventListener("click", function (event) {
+                                          event.preventDefault()
+                                
+                                          stepMenuOne.classList.add('active')
+                                          stepMenuTwo.classList.remove('active')
+                                
+                                          stepOne.classList.add('active')
+                                          stepTwo.classList.remove('active')
+                                
+                                          formNextBtn.classList.remove('active')})
+          
+                                        }
+                                        
+          
+
+                                        break;
+                                      }
+                                    }
                                 </script>
-                                <button type="submit" formaction="/postconfirmation" style="background-color: #a17a83; color:white;" class="w3-large w3-bar-item w3-button">
+                                <button onclick=submitForm() type="submit" formaction="/postconfirmation" style="background-color: #a17a83; color:white;" class="w3-large w3-bar-item w3-button">
                                   <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="11" cy="11" r="10.5" fill="white" stroke="#DDE3EC"/>
                                     <g clip-path="url(#clip0_1667_1314)">
