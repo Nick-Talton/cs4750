@@ -417,7 +417,7 @@ margin-top: 50px ;
                                     min="0"
                                     step="1"
                                     name="min_tank_size"
-                                    id="wing_span"
+                                    id="min_tank_size"
                                     placeholder="0.00"
                                     class="formbold-form-input"
                                     required
@@ -461,44 +461,52 @@ margin-top: 50px ;
                               <div>
                                 <script>
                                   function submitForm() {
-                                    // Get the form element
-                                    let form = document.getElementById("postCreationForm");
-                                    // Get all the input elements inside the form
+                                    console.log("alert")
+                                    const mammals = new Set(["wing_span", "noise_level","habitat", "min_tank_size", "temperament", "water_type" ])
+                                    const birds = new Set(["eye_color", "weight", "habitat", "min_tank_size", "temperament", "water_type"])
+                                    const reptiles = new Set(["eye_color", "weight", "wing_span", "noise_level", "min_tank_size", "temperament", "water_type"])
+                                    const fish = new Set(["eye_color", "weight", "wing_span", "noise_level", "habitat"])
+                                    
+
+                                    let skip = new Set([]);
+                                    if (document.getElementById("path").value == "fish"){
+                                      skip = fish;
+                                    } else if (document.getElementById("path").value == "reptiles"){
+                                      skip = reptiles
+                                    } else if (document.getElementById("path").value == "birds"){
+                                      skip = birds
+                                    } else {
+                                      skip = mammals
+                                    }
+
+                                    for (let element of skip){
+                                      console.log(element, document.getElementById(element))
+                                      document.getElementById(element).removeAttribute("required")
+                                      
+                                    }
+
+                                    let form = document.getElementById("postCreationForm")
                                     let inputs = form.querySelectorAll("input");
-                                    // Loop through each input element
                                     for (let input of inputs) {
-                                      // Check if the input element is valid
-                                      if (!input.checkValidity()) {
+                                      if (!skip.has(input['id']) && !input.checkValidity()) {
                                         event.preventDefault()
-                                        
+                                        const formNextBtn = document.getElementById('next_button')
+                                        formNextBtn.style.visibility = "visible";
+                                        console.log(formNextBtn)
+
+                                        formNextBtn.classList.add('active')
           
                                         stepMenuThree.classList.remove('active')
                                         stepMenuOne.classList.add('active')
                                 
                                         stepThree.classList.remove('active')
                                         stepOne.classList.add('active')
-                                        
-                                        const formNextBtn = document.querySelector('.formbold-btn')
-
-                                        formNextBtn.classList.add('active')
-                                        formNextBtn.addEventListener("click", function (event) {
-                                          event.preventDefault()
-                                
-                                          stepMenuOne.classList.add('active')
-                                          stepMenuTwo.classList.remove('active')
-                                
-                                          stepOne.classList.add('active')
-                                          stepTwo.classList.remove('active')
-                                
-                                          formNextBtn.classList.remove('active')})
+                                        break
           
-                                        }
-                                        
-          
-
-                                        break;
                                       }
+                                      
                                     }
+                                  }
                                 </script>
                                 <button onclick=submitForm() type="submit" formaction="/postconfirmation" style="background-color: #a17a83; color:white;" class="w3-large w3-bar-item w3-button">
                                   <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -540,8 +548,8 @@ margin-top: 50px ;
                             <button class="formbold-back-btn">
                               Back
                             </button>
-                  
-                            <button class="formbold-btn">
+                            
+                            <button id="next_button" class="formbold-btn">
                                 Next Step
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_1675_1807)">
