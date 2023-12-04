@@ -36,7 +36,9 @@ def login():
                 else:
                     return render_template('login.html', title='Login', error='Invalid Credentials')
 
-
+    if 'error' in request.args:
+        error = request.args.get('error')
+        return render_template('login.html', title='Login', error=error)
     return render_template('login.html', title='Login')
 
 @loginpage.route('/logout')

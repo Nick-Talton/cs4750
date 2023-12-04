@@ -122,3 +122,46 @@ def grant_admin_privileges():
     except Exception as e:
         print(e)
         return render_template('profile.html', title='Profile', error='Whoops... something happened. Please try again.', username=first_name)
+
+
+@profilepage.route('/delete_user', methods=['GET', 'POST'])
+def delete_user():
+    try:
+        logged_in_user = session['email']
+        first_name = session['first_name']
+        session_user = session['user']
+        if 'email' in session and request.method == 'POST':
+            del_user_password = request.form.get("del_user_password")
+            confirmation = request.form.get("confirmation")
+            hashed_password = bcrypt.hashpw(del_user_password.encode('utf-8'), bcrypt.gensalt())
+
+            with get_db() as connection:
+                    with connection.cursor() as cursor:
+                        # paramertized queries
+                        query = "SELECT * FROM Users WHERE email=%s AND first_name=%s"
+                        cursor.execute(query, (logged_in_user,first_name,))
+                        user = cursor.fetchone()
+                        print(user)
+
+                        if user and (bcrypt.checkpw(del_user_password.encode('utf-8'), user['password'].encode('utf-8'))) and confirmation == "CONFIRM":
+                            # paramertized queries
+                            print("In here")
+                            query = "DELETE FROM Users WHERE email=%s"
+                            cursor.execute(query, (logged_in_user,))
+                            connection.commit()
+                            session.pop('email', None)
+                            session.pop('first_name', None)
+                            session.pop('user', None)
+                            return redirect(url_for('login.login', title='Login', error='Account Deleted'))
+                        else:
+                            print("Failed to delete")
+                            return render_template('profile.html', title='Profile', password_error='Account Deletion Failed', username=first_name, user=user)
+                        
+        return render_template('profile.html', title='Profile', password_error='Account Deletion Failed', username=first_name, user=session_user)
+
+
+    except Exception as e:
+        print(e)
+        return render_template('profile.html', title='Profile', error='Whoops... something happened. Please try again.', username=first_name)
+
+(1064, "You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE email='test@example.com' AND first_name='Nick'' at line 1")

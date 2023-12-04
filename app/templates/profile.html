@@ -147,6 +147,9 @@
                             <a id="mybtn2" href="#">Admin Login</a>
                             <!-- <a id="myBtn2" type="button" class="btn" style="background-color:#a17a83; color:white; font-size:18px;">Admin Login</a> -->
                           </div>
+                          <div class="d-flex justify-content-center mb-2">
+                            <a id="mybtn3" href="#">Remove Account</a>
+                          </div>
                         </div>
                       </div>
                       </div>
@@ -210,6 +213,28 @@
                           </form>
                       </div>
                   </div>
+
+                  <!-- The Modal -->
+                  <div id="myModal3" class="modal">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <h3 id="close3" style="padding:10px;">X</h3>
+                        <h3>Remove My Account</h3>
+                        <form action="/delete_user" method="post">
+                
+                            <label for="del_user_password">Password:</label>
+                            <input type="password" name="del_user_password" required><br>
+
+                            <label for="confirmation">Please Type "CONFIRM":</label>
+                            <input type="text" name="confirmation" required><br>
+
+                            <div style="padding-top:10px;">
+                              <button onClick="confirmDelete()" type="submit" class="w3-button" style="color:white; background-color:#a17a83">Delete My Account</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
                   
     
 
@@ -256,14 +281,17 @@
                         // Get the modal
                         var modal = document.getElementById("myModal");
                         var modal2 = document.getElementById("myModal2");
+                        var modal3 = document.getElementById("myModal3");
 
                         // Get the button that opens the modal
                         var btn = document.getElementById("myBtn");
                         var btn2 = document.getElementById("mybtn2");
+                        var btn3 = document.getElementById("mybtn3");
 
                         // Get the <span> element that closes the modal
                         var span = document.getElementsByClassName("close")[0];
                         var span2 = document.getElementById("close2");
+                        var span3 = document.getElementById("close3");
 
                         // When the user clicks on the button, open the modal
                         btn.onclick = function() {
@@ -271,6 +299,9 @@
                         }
                         btn2.onclick = function() {
                             modal2.style.display = "block";
+                        }
+                        btn3.onclick = function() {
+                            modal3.style.display = "block";
                         }
 
                         // When the user clicks on <span> (x), close the modal
@@ -280,6 +311,9 @@
                         span2.onclick = function() {
                             modal2.style.display = "none";
                         }
+                        span3.onclick = function() {
+                            modal3.style.display = "none";
+                        }
 
                         // When the user clicks anywhere outside of the modal, close it
                         window.onclick = function(event) {
@@ -288,6 +322,9 @@
                             }
                             if (event.target == modal2) {
                                 modal2.style.display = "none";
+                            }
+                            if (event.target == modal3) {
+                                modal3.style.display = "none";
                             }
                         }
                       </script>
@@ -400,6 +437,13 @@
                     <span class="w3-xlarge">We noticed you're not logged in, <a href="/login" class="w3-button w3-red w3-padding-large w3-xlarge w3-margin-top  w3-hover-opacity-off">Login here</a></span>
                 {% endif %}
             {% endif %}
+            <script>
+              function confirmDelete() {
+                  if (confirm('Are you sure you want to delete your account?')) {
+                      window.location.href = "/delete_user";
+                  }
+              }
+            </script>
         <!-- </div>  -->
     <!-- </header> -->
 </body>
