@@ -14,6 +14,9 @@ def get_db():
         cursorclass=pymysql.cursors.DictCursor
     )
 
+
+
+
 @cartpage.route('/cart', methods=["GET", "POST"])
 def cart():
     if 'email' in session:
@@ -27,10 +30,19 @@ def cart():
                 print("id:", id)
                 with get_db() as connection:
                     with connection.cursor() as cursor:
-                        query = "INSERT INTO Purchases (pet_id,email) VALUES (%s, %s);"
+                        query = "SELECT * FROM Purchases WHERE pet_id=%s AND email=%s;"
                         cursor.execute(query,(id,logged_in_user,))
-                        connection.commit()
-                        connection.close()
+                        item = cursor.fetchone()
+                        if not item:
+                            query = "INSERT INTO Purchases (pet_id, email) VALUES (%s, %s);"
+                            cursor.execute(query,(id,logged_in_user,))
+                            connection.commit()
+                            connection.close()
+                    # with connection.cursor() as cursor:
+                    #     query = "DELETE FROM Posts WHERE pet_id = %s;"
+                    #     cursor.execute(query,(id,))
+                    #     connection.commit()
+                    #     connection.close()
             except Exception as e:
                 print(e)
                 print("in except block")

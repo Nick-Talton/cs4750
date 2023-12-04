@@ -51,7 +51,7 @@ def post(id):
                 with connection.cursor() as cursor:
                     # query = "SELECT * FROM Pets NATURAL JOIN Breeds NATURAL JOIN Birthdays NATURAL JOIN Reptiles NATURAL JOIN Water NATURAL JOIN Fish NATURAL JOIN Mammals NATURAL JOIN Birds WHERE pet_id = %s;"
                     # query = "SELECT * FROM Pets NATURAL JOIN Breeds NATURAL JOIN Birthdays WHERE pet_id = %s;"
-                    query = "SELECT * FROM Pets NATURAL JOIN Breeds NATURAL JOIN Birthdays LEFT OUTER JOIN Reptiles ON Pets.pet_id = Reptiles.pet_id LEFT OUTER JOIN Mammals ON Pets.pet_id = Mammals.pet_id LEFT OUTER JOIN Birds ON Pets.pet_id = Birds.pet_id LEFT OUTER JOIN Fish on Pets.pet_id = Fish.pet_id LEFT OUTER JOIN Water ON Fish.water_type = Water.water_type WHERE Pets.pet_id = %s;"
+                    query = "SELECT * FROM Pets NATURAL JOIN Posts NATURAL JOIN Breeds NATURAL JOIN Birthdays LEFT OUTER JOIN Reptiles ON Pets.pet_id = Reptiles.pet_id LEFT OUTER JOIN Mammals ON Pets.pet_id = Mammals.pet_id LEFT OUTER JOIN Birds ON Pets.pet_id = Birds.pet_id LEFT OUTER JOIN Fish on Pets.pet_id = Fish.pet_id LEFT OUTER JOIN Water ON Fish.water_type = Water.water_type WHERE Pets.pet_id = %s;"
                     cursor.execute(query,(id,))
                     post = cursor.fetchall() 
         p = post[0] if post else None

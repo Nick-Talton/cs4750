@@ -29,9 +29,9 @@ def shop():
                     updated_filters = [f"'{filter}'" for filter in selected_filters]
                     where_clause = f"animal_class IN ({', '.join(updated_filters)})"
 
-                    query = f"SELECT pet_id, breed, name, price, age FROM Pets NATURAL JOIN Breeds NATURAL JOIN Birthdays WHERE {where_clause};"
+                    query = f"SELECT pet_id, breed, name, price, age FROM Pets NATURAL JOIN Breeds NATURAL JOIN Birthdays NATURAL JOIN Posts WHERE {where_clause};"
                 else:
-                    query = "SELECT pet_id, breed, name, price, age FROM Pets NATURAL JOIN Breeds NATURAL JOIN Birthdays;"
+                    query = "SELECT pet_id, breed, name, price, age FROM Pets NATURAL JOIN Breeds NATURAL JOIN Birthdays NATURAL JOIN Posts;"
 
                 with get_db() as connection:
                     with connection.cursor() as cursor:
@@ -53,7 +53,7 @@ def shop():
 
             with get_db() as connection:
                 with connection.cursor() as cursor:
-                    query = "SELECT pet_id, breed, name, price, age FROM Pets NATURAL JOIN Breeds NATURAL JOIN Birthdays WHERE animal_class = %s"
+                    query = "SELECT pet_id, breed, name, price, age FROM Pets NATURAL JOIN Breeds NATURAL JOIN Birthdays NATURAL JOIN Posts WHERE animal_class = %s"
                     cursor.execute(query, (picture_type,))
                     picture_filtered_posts = cursor.fetchall()
             if not picture_filtered_posts:
@@ -63,7 +63,7 @@ def shop():
         else:
             with get_db() as connection:
                 with connection.cursor() as cursor:
-                    query = "SELECT pet_id, breed, name, price, age FROM Pets NATURAL JOIN Breeds NATURAL JOIN Birthdays;"
+                    query = "SELECT pet_id, breed, name, price, age FROM Pets NATURAL JOIN Breeds NATURAL JOIN Birthdays NATURAL JOIN Posts;"
                     cursor.execute(query)
                     posts = cursor.fetchall()
             if not posts:
