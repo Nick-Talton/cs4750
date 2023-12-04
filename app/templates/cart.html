@@ -60,10 +60,11 @@
                     <div class="col-md-2 d-flex justify-content-center">
                       <div>
                         <div style="padding:10px;">
-                          <form id="remove" action="{{ url_for('cartpage.cartRemove', petId=post.pet_id )}}" method="post">
+                          <form id="remove" action="{{ url_for('cartpage.cartRemove', petId=post.pet_id, seller=post.email )}}" method="post">
                               <button onclick="confirmationRemove()" type="button" class="btn btn-lg me-2 " style=" color:white; background-color:rgb(213, 108, 108)">Remove</button>
                           <input id=petId value="{{post.pet_id}}" type="hidden" style="text-align:center; color:white; background-color:#a17a83" class="w3-button w3-xlarge w3-margin-top "></input>
-                          </form>
+                          <input id=petId value="{{post.email}}" type="hidden" style="text-align:center; color:white; background-color:#a17a83" class="w3-button w3-xlarge w3-margin-top "></input>  
+                        </form>
                         <script>
                           function confirmationRemove() {
                             if (confirm('Are you sure you want to remove this item from your cart?')) {
