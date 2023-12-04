@@ -28,7 +28,8 @@ def checkout():
         # print("session:", session)
         # logged_in_user = session['email']
         first_name = session['first_name']
-        return render_template('checkout.html', title='Checkout', username=first_name)
+        session_user = session['user']
+        return render_template('checkout.html', title='Checkout', username=first_name, user=session_user)
     else:
         # print("no user logged in")
         return render_template('index.html', title='Home')
