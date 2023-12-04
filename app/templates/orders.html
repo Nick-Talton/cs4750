@@ -1,0 +1,157 @@
+<!-- cart.html -->
+{% extends "base.html" %}
+{% block description %}Cart{% endblock %}
+{% block title %}Cart{% endblock %}
+{% block navtitle %}Cart{% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+</head>
+<body>
+
+  <div class="row" >
+    <!-- <div class="col-md-8 mb-4">
+      <div class="card mb-4"> -->
+    <section class="" >
+        <div class="card" style="padding:100px;">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+              <p><span class="h2">This is the my orders page </span><span class="h4">({{ posts|length }} Item In Your Cart)</span></p>
+      
+              <div class="card mb-4" style="background-color:rgb(248, 246, 246)">
+                <div class="card-body p-4">
+
+
+                {% if posts|length > 0 %}                    
+                  {% for post in posts %}
+
+      
+                  <div class="row align-items-center">
+                    <div class="col-md-2">
+                      <img src="../static/img/home1.jpg" style="background-color:rgb(248, 246, 246); padding:10px;"
+                        class="img-fluid" alt="Generic placeholder image">
+                    </div>
+                    <div class="col-md-2 d-flex justify-content-center">
+                      <div>
+                        <p class="small text-muted mb-4 pb-2">Name</p>
+                        <p class="lead fw-normal mb-0">{{ post.name }}</p>
+                      </div>
+                    </div>
+                    <div class="col-md-2 d-flex justify-content-center">
+                      <div>
+                        <p class="small text-muted mb-4 pb-2">Breed</p>
+                        <p class="lead fw-normal mb-0">{{ post.breed }}</p>
+                      </div>
+                    </div>
+                    <div class="col-md-2 d-flex justify-content-center">
+                      <div>
+                        <p class="small text-muted mb-4 pb-2">Age</p>
+                        <p class="lead fw-normal mb-0">{{ post.age }} Years Old</p>
+                      </div>
+                    </div>
+                    <div class="col-md-2 d-flex justify-content-center">
+                      <div>
+                        <p class="small text-muted mb-4 pb-2">Price</p>
+                        <p class="lead fw-normal mb-0">{{ post.price }}</p>
+                      </div>
+                    </div>
+                    <div class="col-md-2 d-flex justify-content-center">
+                      <div>
+                        <div style="padding:10px;">
+                          <form id="remove" action="{{ url_for('cartpage.cartRemove', petId=post.pet_id, seller=post.email )}}" method="post">
+                              <button onclick="confirmationRemove()" type="button" class="btn btn-lg me-2 " style=" color:white; background-color:rgb(213, 108, 108)">Remove</button>
+                          <input id=petId value="{{post.pet_id}}" type="hidden" style="text-align:center; color:white; background-color:#a17a83" class="w3-button w3-xlarge w3-margin-top "></input>
+                          <input id=petId value="{{post.email}}" type="hidden" style="text-align:center; color:white; background-color:#a17a83" class="w3-button w3-xlarge w3-margin-top "></input>  
+                        </form>
+                        <script>
+                          function confirmationRemove() {
+                            if (confirm('Are you sure you want to remove this item from your cart?')) {
+                              document.getElementById("remove").submit();
+                            }
+                          }
+                        </script>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+      
+                {% endfor %}
+              </div>
+            </div>
+
+
+            <div class="card mb-5" style="background-color:rgb(248, 246, 246)">
+              <div class="card-body p-4">
+    
+                <div class="float-end">
+                  <p class="mb-0 me-5 d-flex align-items-center">
+                    <span class=" text-muted me-2">Order Total:</span> <span
+                      class="lead fw-normal">${{ total }}</span>
+                  </p>
+                </div>
+    
+              </div>
+            </div>
+            <div class="d-flex justify-content-end">
+          <a href="/shop">
+              <button type="button" class="btn btn-light btn-lg me-2">Continue Shopping</button>
+          </a>
+          <a href="/checkout">
+              <button type="button" style="background-color:#a17a83; color:white;" class="btn btn-lg">Checkout</button>
+          </a>
+          </div>
+            
+              {% else %}
+                <img src="../static/img/emptyCart.png" style="background-color:rgb(248, 246, 246); padding:10px;">
+                <div class="d-flex justify-content-end">
+              <a href="/shop">
+                  <button type="button" class="btn btn-light btn-lg me-2">Continue shopping</button>
+              </a>
+              <a href="/">
+                  <button type="button" style="background-color:#a17a83; color:white;" class="btn btn-lg">Back to Home</button>
+              </a>
+              </div>
+              {% endif %}
+
+      
+              
+      
+              
+      
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+      
+    
+
+
+    <!-- <a href="/checkout">Checkout</a>
+    <table>
+        <tr>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+        {% for item in cart %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.price * item.quantity }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p>Total: {{ cart_total }}</p>
+    <button>Checkout</button> -->
+  </div>
+
+</body>
+</html>
+{% endblock %}

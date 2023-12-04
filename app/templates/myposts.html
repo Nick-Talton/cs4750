@@ -1,0 +1,144 @@
+<!-- cart.html -->
+{% extends "base.html" %}
+{% block description %}Cart{% endblock %}
+{% block title %}Cart{% endblock %}
+{% block navtitle %}Cart{% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+</head>
+<body>
+
+  <div class="row" >
+    <!-- <div class="col-md-8 mb-4">
+      <div class="card mb-4"> -->
+    <section class="" >
+        <div class="card" style="padding:100px;">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+              <p><span class="h1">My Posts </span></p>
+      
+
+
+                <!-- {% if posts|length > 0 %}                    
+                  {% for post in posts %}
+
+
+                  
+      
+                    {% endfor %} -->
+             
+
+
+            
+              <!-- {% else %}
+                <p>No posts yet</p>
+              {% endif %} -->
+
+      
+              {% if posts|length > 0 %}
+
+                {% for post in posts %}
+              <section style="background-color: rgb(248, 246, 246);">
+                <div class="container py-5">
+
+                    
+                  <div class="row justify-content-center mb-3">
+                    <div class="col-md-12 col-xl-10">
+                      <div class="card shadow-0 border rounded-3">
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
+                              <div class="bg-image hover-zoom ripple rounded ripple-surface">
+                                <img src="../static/img/home1.jpg"
+                                  class="w-100"  style="padding-right:50px;"/>
+                                <a href="#!">
+                                  <div class="hover-overlay">
+                                    <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);"></div>
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-xl-6">
+                              <h1 style="font-weight:bold;">{{ post.name }}</h1>
+                              <h3 class="w3-opacity">{{ post.price }}</h3>
+
+                              
+                              <h2>{{ post.breed }}</h2>
+                              <h3>{{ post.age }} Years Old</h3>
+
+                            </div>
+                            <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start" >
+                                {% if post.sale_finalized =="0" %}
+                              <div >
+                                <h4 style="text-align:center; font-weight:bold; color:rgb(125, 125, 125)">Pending Sale</h4>
+                              </div>
+                              {% else %}
+                              <div >
+                                <h4 style="text-align:center; font-weight:bold; color:rgb(120, 191, 120)">Sold</h4>
+                              </div>
+                              {% endif %}
+                              <div class="d-flex flex-column mt-4">
+                                <button style="background-color:#a17a83; color:white;" class="btn" type="button">Edit</button>
+                                <button class="btn btn-outline-dark mt-2" type="button">
+                                  Delete Post
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  
+                  
+                </div>
+              </section>
+              {% endfor %}
+
+
+            {% else %}
+                <img src="../static/img/myposts.jpg">
+                <h1>You haven't created any posts</h1>
+                <h2>Create Your First One Today!</h2>
+                <a href="/post/create" class="btn">Create Post</a>
+            {% endif %}
+              
+      
+        </div>
+      </section>
+
+
+
+    </div>
+</div>
+    
+
+
+    <!-- <a href="/checkout">Checkout</a>
+    <table>
+        <tr>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+        {% for item in cart %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.price * item.quantity }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p>Total: {{ cart_total }}</p>
+    <button>Checkout</button> -->
+  </div>
+
+</body>
+</html>
+{% endblock %}
