@@ -98,7 +98,7 @@
           <a href="/shop">
               <button type="button" class="btn btn-light btn-lg me-2">Continue Shopping</button>
           </a>
-          <a href="/checkout">
+          <a href="{{ url_for('checkoutpage.checkout', subtotal=total )}}">
               <button type="button" style="background-color:#a17a83; color:white;" class="btn btn-lg">Checkout</button>
           </a>
           </div>

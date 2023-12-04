@@ -1,5 +1,5 @@
 # confirmationpage.py
-from flask import Blueprint, render_template, session
+from flask import Blueprint, render_template, session, request
 from jinja2 import TemplateNotFound
 import pymysql
 
@@ -21,12 +21,29 @@ def get_db():
         cursorclass=pymysql.cursors.DictCursor
     )
 
-@confirmationpage.route('/confirmation')
+@confirmationpage.route('/confirmation', methods=['GET', 'POST'])
 def confirmation():
     if 'email' in session:
         # print("user logged in")
         # print("session:", session)
         # logged_in_user = session['email']
+        print('in confirmation')
+        if request.method == 'POST':
+            print('in post')
+            try:
+                print("in try block")
+                first_name = session['first_name']
+                logged_in_user = session['email']
+                id = request.args.get('petId')
+                with get_db() as connection:
+                    with connection.cursor() as cursor:
+                        query = "UPDATE Purchases SET sale_finalized = %s WHERE email=%s"
+                        cursor.execute(query,('1',logged_in_user,))
+                        connection.commit()
+                        print('hekki')
+            except Exception as e:
+                print(e)
+        print('out of post')
         first_name = session['first_name']
         return render_template('confirmation.html', title='Confirmation', username=first_name)
     else:
