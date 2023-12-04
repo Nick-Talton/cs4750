@@ -1,0 +1,118 @@
+<!-- cart.html -->
+{% extends "base.html" %}
+{% block description %}Cart{% endblock %}
+{% block title %}Cart{% endblock %}
+{% block navtitle %}Cart{% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+</head>
+<body>
+
+  <div class="row" >
+    <!-- <div class="col-md-8 mb-4">
+      <div class="card mb-4"> -->
+    <section class="" >
+        <div class="card" style="padding:100px;">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+              <p><span class="h1">My Orders </span></p>
+      
+
+
+                <!-- {% if posts|length > 0 %}                    
+                  {% for post in posts %}
+
+
+                  
+      
+                    {% endfor %} -->
+             
+
+
+            
+              <!-- {% else %}
+                <p>No posts yet</p>
+              {% endif %} -->
+
+      
+              {% if orders|length > 0 %}
+              <section style="background-color: #eee;">
+                <div class="container py-5">
+                    <div class="row">
+                {% for order in orders %}
+
+                
+            
+                    <div class="col-md-12 col-lg-4 mb-4 mb-lg-0" style="padding-bottom:20px;">
+                      <div class="card" style="text-align:center;">
+                        <div class="d-flex justify-content-center" style="text-align:center;">
+                          <h1 style="text-align:center;">{{ order.name }}</h1>
+                        </div>
+                        <img src="../static/img/home1.jpg"
+                          class="card-img-top" alt="pet" style="max-height:300px;" />
+                        <div class="card-body">
+                          <div class="d-flex justify-content-between mb-3">
+                            <h3 class="mb-0">{{ order.breed }}</h3>
+                            <h3 class="text-dark mb-0">{{ order.price }}</h3>
+                          </div>             
+                        
+                        </div>
+                      </div>
+                    </div>               
+                    
+                
+
+
+              {% endfor %}
+            </div>
+            </div>
+        </section>
+
+
+            {% else %}
+            <div style="text-align:center;">
+                <h1>You haven't adopted any pets!</h1>
+                <img src="../static/img/orders.jpg" style="padding:0px; max-height:500px;">
+                <h2>Adopt One Today!</h2>
+                <a href="/shop" class="btn" style="background-color:#a17a83; color:white;">Shop Now</a>
+            </div>
+            {% endif %}
+              
+      
+        </div>
+      </section>
+
+
+
+    </div>
+</div>
+    
+
+
+    <!-- <a href="/checkout">Checkout</a>
+    <table>
+        <tr>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+        {% for item in cart %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.price * item.quantity }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p>Total: {{ cart_total }}</p>
+    <button>Checkout</button> -->
+  </div>
+
+</body>
+</html>
+{% endblock %}

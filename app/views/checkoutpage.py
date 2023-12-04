@@ -1,5 +1,5 @@
 # checkoutpage.py
-from flask import Blueprint, render_template, session
+from flask import Blueprint, render_template, session, request
 from jinja2 import TemplateNotFound
 import pymysql
 
@@ -29,7 +29,10 @@ def checkout():
         # logged_in_user = session['email']
         first_name = session['first_name']
         session_user = session['user']
-        return render_template('checkout.html', title='Checkout', username=first_name, user=session_user)
+        if 'subtotal' in request.args:
+            subtotal = request.args.get('subtotal')
+            total = float(subtotal) + 21.88
+        return render_template('checkout.html', title='Checkout', username=first_name, user=session_user, subtotal=subtotal, total=total)
     else:
         # print("no user logged in")
         return render_template('index.html', title='Home')

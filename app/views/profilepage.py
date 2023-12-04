@@ -80,7 +80,66 @@ def profile():
     except Exception as e:
         print(e)
         return render_template('profile.html', title='Profile', error='Whoops... something happened. Please login again.')
-            
+
+@profilepage.route('/profile/myposts', methods=['GET', 'POST'])
+def myposts():
+    try:
+        if 'user' in session:
+            # print("user logged in")
+            # print("session:", session)
+            logged_in_user = session['email']
+            first_name = session['first_name']
+            session_user = session['user']
+
+            with get_db() as connection:
+                with connection.cursor() as cursor:
+                    # paramertized queries
+                    query = "(SELECT pet_id, name, breed, age, price, email, '0' AS sale_finalized FROM Posts NATURAL JOIN Pets NATURAL JOIN Breeds NATURAL JOIN Birthdays WHERE email=%s) UNION (SELECT pet_id, name, breed, age, price, seller as email, sale_finalized FROM Purchases NATURAL JOIN Pets NATURAL JOIN Breeds NATURAL JOIN Birthdays WHERE seller=%s)" 
+
+                    cursor.execute(query, (logged_in_user,logged_in_user))
+                    posts = cursor.fetchall()
+                
+                if not posts:
+                    return render_template('myposts.html', title='Profile', post_error='No Posts Found.', username=first_name, user=session_user)
+
+            return render_template('myposts.html', title='Profile', username=first_name, user=session_user, posts=posts)
+
+        else:
+            return render_template('index.html', title='Home')
+    except Exception as e:
+        print(e)
+        return render_template('profile.html', title='Profile', error='Whoops... something happened. Please login again.')
+
+
+@profilepage.route('/profile/orders', methods=['GET', 'POST'])
+def orders():
+    try:
+        if 'user' in session:
+            # print("user logged in")
+            # print("session:", session)
+            logged_in_user = session['email']
+            first_name = session['first_name']
+            session_user = session['user']
+
+            with get_db() as connection:
+                with connection.cursor() as cursor:
+                    # paramertized queries
+                    query = "SELECT pet_id, name, breed, age, price, seller as email, sale_finalized FROM Purchases NATURAL JOIN Pets NATURAL JOIN Breeds NATURAL JOIN Birthdays WHERE email=%s AND sale_finalized=%s"
+                    cursor.execute(query, (logged_in_user,'1'))
+                    orders = cursor.fetchall()
+            if not orders:
+                return render_template('orders.html', title='Profile', order_error='No Orders Found.', username=first_name, user=session_user)
+
+            return render_template('orders.html', title='Profile', username=first_name, user=session_user, orders=orders)
+
+        else:
+            return render_template('index.html', title='Home')
+    except Exception as e:
+        print(e)
+        return render_template('profile.html', title='Profile', error='Whoops... something happened. Please login again.')
+    
+
+
 @profilepage.route('/grant_admin_privileges', methods=['POST'])
 def grant_admin_privileges():
     try:
