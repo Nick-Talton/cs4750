@@ -97,7 +97,7 @@ def createPet(requestObject):
             cursor.execute(query, (
                 pet_id,
                 requestObject['name'],
-                requestObject['price'],
+                "$"+requestObject['price'],
                 requestObject['gender'],
                 requestObject['breed'],
                 requestObject['dob'],
