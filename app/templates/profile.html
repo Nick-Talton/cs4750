@@ -31,6 +31,73 @@
             color: grey;
         }
 
+        .container-admin {
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 22px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+          }
+
+          /* Hide the browser's default checkbox */
+          .container-admin input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+          }
+
+          /* Create a custom checkbox */
+          .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 25px;
+            width: 25px;
+            background-color: #eee;
+          }
+
+          /* On mouse-over, add a grey background color */
+          .container-admin:hover input ~ .checkmark {
+            background-color: #ccc;
+          }
+
+          /* When the checkbox is checked, add a blue background */
+          .container-admin input:checked ~ .checkmark {
+            background-color: #2196F3;
+          }
+
+          /* Create the checkmark/indicator (hidden when not checked) */
+          .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+          }
+
+          /* Show the checkmark when checked */
+          .container-admin input:checked ~ .checkmark:after {
+            display: block;
+          }
+
+          /* Style the checkmark/indicator */
+          .container-admin .checkmark:after {
+            left: 9px;
+            top: 5px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+          }
+
     </style>
 </head>
 <body style="min-height:100vh; display:flex; flex-direction:column;">
@@ -111,23 +178,39 @@
 
                      <!-- The Modal -->
                      <div id="myModal2" class="modal">
-
-                        <!-- Modal content -->
-                        <div class="modal-content">
-                            <h3 id="close2" style="padding:10px;">X</h3>
-                                <h3>Admin Login</h3>
-                                <form action="/grant_admin_privileges" method="post">
-                                    <label for="admin">Admin Password:</label>
-                                    <input type="password" name="admin"><br>
-                                    <label for="computing_id">Admin to Computing ID:</label>
-                                    <input type="text" name="computing_id"><br>
-                                    <div style="padding-top:10px;">
-                                    <button onClick="showAlert2()" type="submit" class="w3-button" style="color:white; background-color:#a17a83">Grant Admin Priviledges</button>
-                                    </div>
-                                </form>
-                        </div>
-    
-                        </div>
+                      <!-- Modal content -->
+                      <div class="modal-content">
+                          <h3 id="close2" style="padding:10px;">X</h3>
+                          <h3>Admin Login</h3>
+                          <form action="/grant_admin_privileges" method="post">
+                              <label class="container-admin">Admin
+                                  <input type="radio" name="userType" value="Admin" required>
+                                  <span class="checkmark"></span>
+                              </label>
+                  
+                              <label class="container-admin">Employee
+                                  <input type="radio" name="userType" value="Employee" required>
+                                  <span class="checkmark"></span>
+                              </label>
+                  
+                              <label class="container-admin">User
+                                  <input type="radio" name="userType" value="User" required>
+                                  <span class="checkmark"></span>
+                              </label>
+                  
+                              <label for="admin">Admin Password:</label>
+                              <input type="password" name="admin" required><br>
+                              
+                              <label for="computing_id">Admin to Computing ID:</label>
+                              <input type="text" name="computing_id" required><br>
+                              
+                              <div style="padding-top:10px;">
+                                  <button onClick="showAlert2()" type="submit" class="w3-button" style="color:white; background-color:#a17a83">Grant Admin Privileges</button>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
+                  
     
 
 
