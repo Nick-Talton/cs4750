@@ -184,7 +184,7 @@ margin-top: 50px ;
         
                             <script>
                               function showMammal() {
-                                document.getElementById("path").value = "mammal";  
+                                document.getElementById("path").value = "Mammals";  
                                 var mammal = document.getElementById("mammalForm");
                                 var bird = document.getElementById("birdForm");
                                 var reptile = document.getElementById("reptileForm");
@@ -196,7 +196,7 @@ margin-top: 50px ;
                               }
         
                               function showBird() {
-                                document.getElementById("path").value = "bird"; 
+                                document.getElementById("path").value = "Birds"; 
                                 var mammal = document.getElementById("mammalForm");
                                 var bird = document.getElementById("birdForm");
                                 var reptile = document.getElementById("reptileForm");
@@ -208,7 +208,7 @@ margin-top: 50px ;
                               }
         
                               function showReptile() {
-                                document.getElementById("path").value = "reptile"; 
+                                document.getElementById("path").value = "Reptiles"; 
                                 var mammal = document.getElementById("mammalForm");
                                 var bird = document.getElementById("birdForm");
                                 var reptile = document.getElementById("reptileForm");
@@ -220,7 +220,7 @@ margin-top: 50px ;
                               }
         
                               function showFish() {
-                                document.getElementById("path").value = "fish"; 
+                                document.getElementById("path").value = "Fish"; 
                                 var mammal = document.getElementById("mammalForm");
                                 var bird = document.getElementById("birdForm");
                                 var reptile = document.getElementById("reptileForm");
@@ -469,11 +469,11 @@ margin-top: 50px ;
                                     
 
                                     let skip = new Set([]);
-                                    if (document.getElementById("path").value == "fish"){
+                                    if (document.getElementById("path").value == "Fish"){
                                       skip = fish;
-                                    } else if (document.getElementById("path").value == "reptiles"){
+                                    } else if (document.getElementById("path").value == "Reptiles"){
                                       skip = reptiles
-                                    } else if (document.getElementById("path").value == "birds"){
+                                    } else if (document.getElementById("path").value == "Birds"){
                                       skip = birds
                                     } else {
                                       skip = mammals
@@ -490,6 +490,7 @@ margin-top: 50px ;
                                     for (let input of inputs) {
                                       if (!skip.has(input['id']) && !input.checkValidity()) {
                                         event.preventDefault()
+                                        alert("Please fill out all fields")
                                         const formNextBtn = document.getElementById('next_button')
                                         formNextBtn.style.visibility = "visible";
                                         console.log(formNextBtn)

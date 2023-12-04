@@ -25,13 +25,13 @@
               <div class="row mb-4">
                 <div class="col">
                   <div class="form-outline">
-                    <input type="text" id="form6Example1" class="form-control" placeholder="{{ user.first_name }}"/>
+                    <input type="text" id="form6Example1" class="form-control" placeholder="First Name" required/>
                     <label class="form-label" for="form6Example1">First name</label>
                   </div>
                 </div>
                 <div class="col">
                   <div class="form-outline">
-                    <input type="text" id="form6Example2" class="form-control" placeholder="{{ user.last_name }}"/>
+                    <input type="text" id="form6Example2" class="form-control" placeholder="Last Name" required/>
                     <label class="form-label" for="form6Example2">Last name</label>
                   </div>
                 </div>
@@ -41,13 +41,13 @@
               <div class="row mb-4">
                 <div class="col">
                   <div class="form-outline">
-                    <input type="text" id="form6Example1" class="form-control" />
+                    <input type="text" id="form6Example1" class="form-control" required/>
                     <label class="form-label" for="form6Example1">Address</label>
                   </div>
                 </div>
                 <div class="col">
                   <div class="form-outline">
-                    <input type="text" id="form6Example2" class="form-control" />
+                    <input type="text" id="form6Example2" class="form-control" required/>
                     <label class="form-label" for="form6Example2">Zip Code</label>
                   </div>
                 </div>
@@ -57,13 +57,13 @@
               <div class="row mb-4">
                 <div class="col">
                   <div class="form-outline">
-                    <input type="text" id="form6Example1" class="form-control" />
+                    <input type="text" id="form6Example1" class="form-control" required />
                     <label class="form-label" for="form6Example1">City</label>
                   </div>
                 </div>
                 <div class="col">
                   <div class="form-outline">
-                    <input type="text" id="form6Example2" class="form-control" />
+                    <input type="text" id="form6Example2" class="form-control" required/>
                     <label class="form-label" for="form6Example2">State</label>
                   </div>
                 </div>
@@ -71,7 +71,7 @@
   
               <!-- Email input -->
               <div class="form-outline mb-4">
-                <input type="email" id="form6Example5" class="form-control" placeholder="{{ user.email }}" />
+                <input type="email" id="form6Example5" class="form-control" placeholder="email@example.com" required/>
                 <label class="form-label" for="form6Example5">Email</label>
               </div>
   
@@ -89,14 +89,14 @@
               <div class="row mb-4">
                 <div class="col">
                   <div class="form-outline">
-                    <input type="text" id="formNameOnCard" class="form-control" placeholder="{{ user.first_name }} {{ user.last_name }}"/>
+                    <input type="text" id="formNameOnCard" class="form-control" placeholder="Name" required/>
                     <label class="form-label" for="formNameOnCard">Name on card</label>
                   </div>
                 </div>
                 <div class="col">
                   <div class="form-outline">
                     <!-- <input type="text" id="formCardNumber" class="form-control" pattern="^[0-9]{16}$" /> -->
-                    <input type="text" id="formCardNumber" class="form-control" />
+                    <input type="text" id="formCardNumber" class="form-control" required/>
                     <label class="form-label" for="formCardNumber">Credit card number</label>
                   </div>
                 </div>
@@ -105,14 +105,14 @@
               <div class="row mb-4">
                 <div class="col">
                   <div class="form-outline">
-                    <input type="date" id="formExpiration" class="form-control" />
+                    <input type="date" id="formExpiration" class="form-control" required/>
                     <label class="form-label" for="formExpiration">Expiration</label>
                   </div>
                 </div>
                 <div class="col">
                   <div class="form-outline">
                     <!-- <input type="text" id="formCVV" class="form-control" pattern="^[0-9]{3,4}$"/> -->
-                    <input type="text" id="formCVV" class="form-control" />
+                    <input type="text" id="formCVV" class="form-control" required/>
                     <label class="form-label" for="formCVV">CVV</label>
                   </div>
                 </div>
@@ -126,11 +126,27 @@
                 </a>
               </form>
               <script>
+
+                function validateForm() {
+                        // Check if all required fields are filled
+                        var inputs = document.querySelectorAll('input[required]');
+                        for (var i = 0; i < inputs.length; i++) {
+                            if (!inputs[i].value) {
+                                alert('Please fill out all  fields.');
+                                return false;
+                            }
+                        }
+                        return true;
+                    }
+
                 function confirmOrder() {
+                    if (validateForm()) {
                       if (confirm('Are you sure you want to place this order?')) {
+
                           // window.location.href = "/confirmation";
                           document.getElementsByTagName("form")[0].submit();
                       } 
+                    }
                   }
               
               </script>
