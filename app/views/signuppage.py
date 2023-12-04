@@ -32,9 +32,21 @@ def signup():
                 query = "INSERT INTO Users (email, password, first_name, last_name) VALUES (%s, %s, %s, %s)"
                 cursor.execute(query, (email, hashed_password, firstName, lastName))
                 connection.commit()
+        
+        with get_db() as connection:
+            with connection.cursor() as cursor:
+                query = "SELECT * FROM Users WHERE email=%s"
+                cursor.execute(query, (email,))
+                user = cursor.fetchone()
 
+                if user and (hashed_password == user['password']):
+                    session['user'] = user
+        
         session['email'] = email
+        session['first_name'] = firstName
 
-        return redirect(url_for('homepage.index', username=email))
+        print(session)
+
+        return render_template('index.html', username=firstName)
 
     return render_template("signup.html")

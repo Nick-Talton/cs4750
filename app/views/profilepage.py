@@ -105,6 +105,8 @@ def grant_admin_privileges():
                         connection.commit()
                 # print("before return")
                 # return redirect(url_for('profilepage.profile', title='Profile', admin_error='Admin Access Granted.', username=first_name, user=session_user))
+                print(session)
+                print(session_user)
                 return render_template('profile.html', title='Profile', admin_error='Admin Access Granted.', username=first_name, user=session_user)
 
             else:
