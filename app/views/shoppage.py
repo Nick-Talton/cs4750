@@ -29,6 +29,7 @@ def shop():
                 if selected_filters:
                     updated_filters = [f"'{filter}'" for filter in selected_filters]
                     where_clause = f"animal_class IN ({', '.join(updated_filters)})"
+                    print(where_clause)
 
                     query = f"SELECT pet_id, breed, name, price, age FROM Pets NATURAL JOIN Breeds NATURAL JOIN Birthdays NATURAL JOIN Posts WHERE {where_clause};"
                 else:
