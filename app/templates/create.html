@@ -490,6 +490,7 @@ margin-top: 50px ;
                                     for (let input of inputs) {
                                       if (!skip.has(input['id']) && !input.checkValidity()) {
                                         event.preventDefault()
+                                        alert("Please fill out all fields")
                                         const formNextBtn = document.getElementById('next_button')
                                         formNextBtn.style.visibility = "visible";
                                         console.log(formNextBtn)
